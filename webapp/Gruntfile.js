@@ -1,81 +1,104 @@
+var fs = require("fs");
+var projectStructure = JSON.parse(fs.readFileSync("project_structure.json"));
+
 module.exports = function (grunt) {
-    'use strict';
-    // Project configuration
+
     grunt.initConfig({
-        // Metadata
-        pkg: grunt.file.readJSON('package.json'),
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-            ' Licensed <%= props.license %> */\n',
-        // Task configuration
+
+        jshint: {
+            files: ['Gruntfile.js', projectStructure.appJsFiles],
+            globals: {
+                console: true,
+                module: true,
+                document: true
+            }
+        },
+
+        less: {
+            development: {
+                options: {
+                    compress: false,
+                    yuicompress: false,
+                    optimization: 2
+                },
+                files: projectStructure.lessToCssFiles
+            },
+            production: {
+                options: {
+                    compress: true,
+                    yuicompress: true,
+                    optimization: 2
+                },
+                files: projectStructure.lessToCssFiles
+            }
+        },
+
         concat: {
             options: {
-                banner: '<%= banner %>',
-                stripBanners: true
+                separator: ';'
             },
-            dist: {
-                src: ['lib/tjazi.com-webapp.js'],
-                dest: 'dist/tjazi.com-webapp.js'
+            development: {
+                // the output files for development are the same as for uglify output
+                // uglify will not be run for development
+                files: [
+                    {
+                        src: projectStructure.libJsFiles,
+                        dest: projectStructure.outputMinifyLibsJsPath
+                    },
+                    {
+                        src: projectStructure.appJsFiles,
+                        dest: projectStructure.outputMinifyAppJsPath
+                    }
+                ]
+            },
+            production: {
+                files: [
+                    {
+                        src: projectStructure.libJsFiles,
+                        dest: projectStructure.outputConcatLibsJsPath
+                    },
+                    {
+                        src: projectStructure.appJsFiles,
+                        dest: projectStructure.outputConcatAppJsPath
+                    }
+                ]
             }
         },
+
         uglify: {
             options: {
-                banner: '<%= banner %>'
+                /* options placeholder */
             },
-            dist: {
-                src: '<%= concat.dist.dest %>',
-                dest: 'dist/tjazi.com-webapp.min.js'
-            }
-        },
-        jshint: {
-            options: {
-                node: true,
-                curly: true,
-                eqeqeq: true,
-                immed: true,
-                latedef: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                unused: true,
-                eqnull: true,
-                browser: true,
-                globals: { jQuery: true },
-                boss: true
+            application: {
+                files: [
+                    {
+                        src: projectStructure.outputConcatLibsJsPath,
+                        dest: projectStructure.outputMinifyLibsJsPath
+                    }
+                ]
             },
-            gruntfile: {
-                src: 'gruntfile.js'
-            },
-            lib_test: {
-                src: ['lib/**/*.js', 'test/**/*.js']
-            }
-        },
-        qunit: {
-            files: ['test/**/*.html']
-        },
-        watch: {
-            gruntfile: {
-                files: '<%= jshint.gruntfile.src %>',
-                tasks: ['jshint:gruntfile']
-            },
-            lib_test: {
-                files: '<%= jshint.lib_test.src %>',
-                tasks: ['jshint:lib_test', 'qunit']
+
+            libraries: {
+                files: [
+                    {
+                        src: projectStructure.outputConcatAppJsPath,
+                        dest: projectStructure.outputMinifyAppJsPath
+                    }
+                ]
             }
         }
     });
 
-    // These plugins provide necessary tasks
+    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
-    // Default task
-    grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
+    // Default task(s).
+    grunt.registerTask('default', ['jshint', 'less:development', 'concat:development']);
+
+    grunt.registerTask('development', ['default']);
+    grunt.registerTask('production', ['jshint', 'less:production', 'concat:production', 'uglify']);
 };
 
