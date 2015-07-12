@@ -1,11 +1,9 @@
 package com.tjazi.webapp.config;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.resource.AppCacheManifestTransformer;
 import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 
@@ -20,15 +18,15 @@ public class WebConfigResourcesHandlerOverride extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/css/**", "/js/**")
                 .addResourceLocations("/WEB-INF/css/", "/WEB-INF/js/")
+
+                /* Update for production - set cache and resourceChain to 'true' */
                 .setCachePeriod(0)
-                .resourceChain(true)
-                .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"))
-                .addTransformer(new AppCacheManifestTransformer());
+                .resourceChain(false)
+                .addResolver(new VersionResourceResolver().addContentVersionStrategy("/**"));
     }
 
     @Bean
     public ResourceUrlEncodingFilter resourceUrlEncodingFilter() {
         return new ResourceUrlEncodingFilter();
     }
-
 }
