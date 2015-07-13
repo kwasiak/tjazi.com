@@ -148,8 +148,12 @@ module.exports = function (grunt) {
                 tasks: ['jshint', 'concat:development']
             },
             html: {
-                files: ['<%= htmlhint.src %>'],
+                files: [projectStructure.htmlFiles],
                 tasks: ['htmlhint']
+            },
+            css: {
+                files: [projectStructure.lessFiles],
+                tasks: ['less:development']
             }
         }
     });

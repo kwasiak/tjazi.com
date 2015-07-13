@@ -16,6 +16,10 @@ public class WebConfigResourcesHandlerOverride extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
+        // static content handling
+        registry.addResourceHandler("/templates/**").addResourceLocations("/WEB-INF/templates/");
+
+        // configure version-related naming convention for JS and CSS files
         registry.addResourceHandler("/css/**", "/js/**")
                 .addResourceLocations("/WEB-INF/css/", "/WEB-INF/js/")
 

@@ -21,9 +21,6 @@ public class HomeController {
     @RequestMapping(value = {"/", "index", "index.html"}, method = RequestMethod.GET)
     public String index() {
 
-        log.info(">>>> js =  '{}'" + this.resourceUrlProvider.getForLookupPath("/js/libs.min.js"));
-        log.info(">>>> js =  '{}'" + this.resourceUrlProvider.getForLookupPath("/css/libs.css"));
-
         return "index";
     }
 }

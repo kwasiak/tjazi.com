@@ -1,5 +1,6 @@
 {
-  "appJsFiles": ["src/main/javascript/**/*.js"],
+  "appJsFiles": ["src/main/javascript/app/**/*.js",
+                 "src/main/javascript/controller/**/*.js"],
 
   "libJsFiles": ["bower_components/angular/angular.js",
                   "bower_components/angular-resource/angular-resource.js",
@@ -15,8 +16,10 @@
   "outputMinifyAppJsPath": "src/main/webapp/WEB-INF/js/app.min.js",
   "outputMinifyLibsJsPath": "src/main/webapp/WEB-INF/js/libs.min.js",
 
+  "lessFiles": "src/main/less/**/*.less",
+
   "lessToCssFiles": {
     "src/main/webapp/WEB-INF/css/libs.css" : "src/main/less/libs.less",
-    "src/main/webapp/WEB-INF/css/app.css" :"src/main/less/app.less"
+    "src/main/webapp/WEB-INF/css/app.css" : ["src/main/less/**/app.less", "src/main/less/**/*View.less"]
   }
 }
