@@ -1,3 +1,5 @@
+"use strict";
+
 var fs = require("fs");
 var projectStructure = JSON.parse(fs.readFileSync("project_structure.json"));
 
@@ -6,12 +8,23 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         jshint: {
-            files: ['Gruntfile.js', projectStructure.appJsFiles],
-            globals: {
-                console: true,
-                module: true,
-                document: true,
-                unused: true
+            serverSide: {
+                src: ['Gruntfile.js'],
+                options: {
+                    unused: true,
+                    strict: true,
+                    curly: true,
+                    node: true
+                }
+            },
+            clientSide: {
+                src: [projectStructure.appJsFiles],
+                options: {
+                    unused: true,
+                    strict: true,
+                    curly: true,
+                    browser: true
+                }
             }
         },
 
@@ -130,8 +143,14 @@ module.exports = function (grunt) {
         },
 
         watch: {
-            files: ['<%= jshint.files %>'],
-            tasks: ['jshint']
+            javascript: {
+                files: ['<%= jshint.clientSide.src %>', '<%= jshint.serverSide.src %>'],
+                tasks: ['jshint', 'concat:development']
+            },
+            html: {
+                files: ['<%= htmlhint.src %>'],
+                tasks: ['htmlhint']
+            }
         }
     });
 
@@ -145,7 +164,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'htmlhint', 'less:development', 'concat:development']);
+    grunt.registerTask('default', ['jshint', 'htmlhint', 'less:development', 'concat:development', 'watch']);
 
     grunt.registerTask('development', ['default']);
     grunt.registerTask('production', ['jshint', 'htmlhint', 'less:production', 'concat:production', 'uglify']);

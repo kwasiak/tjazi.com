@@ -1,5 +1,5 @@
 {
-  "appJsFiles": [],
+  "appJsFiles": ["src/main/javascript/**/*.js"],
 
   "libJsFiles": ["bower_components/angular/angular.js",
                   "bower_components/angular-resource/angular-resource.js",
