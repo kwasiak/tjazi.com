@@ -10,8 +10,49 @@ module.exports = function (grunt) {
             globals: {
                 console: true,
                 module: true,
-                document: true
+                document: true,
+                unused: true
             }
+        },
+
+        htmlhint: {
+            options: {
+                'attr-lower-case': true,
+                'attr-value-not-empty': true,
+                'tag-pair': true,
+                'tag-self-close': true,
+                'tagname-lowercase': true,
+                'id-class-value': true,
+                'id-class-unique': true,
+                'src-not-empty': true,
+                'img-alt-required': true
+            },
+            src: [projectStructure.htmlFiles]
+        },
+
+        // WARNING!!! html minification seems to be breaking link tags
+        // <link /> to <link>; thymeleaf doesn't like that
+        htmlmin: {
+          dev: {
+              options: {
+                  //removeEmptyAttributes: true,
+                  //removeEmptyElements: true,
+                  //removeRedundantAttributes: true,
+                  //removeComments: true,
+                  // html and body are OPTIONAL, so will be removed by below option
+                  // this will blow-up the thymeleaf engine, so careful with that
+                  // removeOptionalTags: true,
+                  collapseWhitespace: true
+              },
+              files: [{
+                  expand: true,
+                  cwd: 'src/main/webapp/WEB-INF/',
+                  dest: 'src/main/webapp/WEB-INF/',
+                  src: ["*.html"],
+                  ext: ".min.html",
+                  extDot: "last"
+              }]
+          }
         },
 
         less: {
@@ -86,6 +127,11 @@ module.exports = function (grunt) {
                     }
                 ]
             }
+        },
+
+        watch: {
+            files: ['<%= jshint.files %>'],
+            tasks: ['jshint']
         }
     });
 
@@ -94,11 +140,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-htmlhint');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'less:development', 'concat:development']);
+    grunt.registerTask('default', ['jshint', 'htmlhint', 'less:development', 'concat:development']);
 
     grunt.registerTask('development', ['default']);
-    grunt.registerTask('production', ['jshint', 'less:production', 'concat:production', 'uglify']);
+    grunt.registerTask('production', ['jshint', 'htmlhint', 'less:production', 'concat:production', 'uglify']);
 };
 
