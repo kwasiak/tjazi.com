@@ -1,6 +1,7 @@
 {
   "appJsFiles": ["src/main/javascript/app/**/*.js",
-                 "src/main/javascript/controller/**/*.js"],
+                 "src/main/javascript/controller/**/*.js",
+                  "src/main/javascript/angularcontroller/**/*.js"],
 
   "libJsFiles": ["bower_components/angular/angular.js",
                   "bower_components/angular-resource/angular-resource.js",

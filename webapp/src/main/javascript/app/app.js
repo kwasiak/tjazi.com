@@ -3,6 +3,8 @@
 
     var app = angular.module("tjaziWebApp", ["ui.router"]);
 
+    var templatesRoot = "templates";
+
     app.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
 
                 function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -11,7 +13,13 @@
                     $stateProvider
                         .state("home", {
                             url: "/",
-                            templateUrl: "templates/home.html"
+                            templateUrl: templatesRoot + "/home.html",
+                            controller: "HomeScreenController as vm"
+                        })
+                        .state("chatScreen", {
+                            url: "/chatscreen",
+                            templateUrl: templatesRoot + "/chatScreen.html",
+                            controller: "ChatScreenController as vm"
                         });
 
                     // make sure all requests will be decorated with the proper header
