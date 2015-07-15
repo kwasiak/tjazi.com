@@ -10,7 +10,7 @@
     function chatScreenController() {
 
         /* jshint validthis: true */
-        var vm = this;
+        //var vm = this;
     }
 
 }());

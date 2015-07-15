@@ -144,7 +144,10 @@ module.exports = function (grunt) {
 
         watch: {
             javascript: {
-                files: ['<%= jshint.clientSide.src %>', '<%= jshint.serverSide.src %>'],
+                files: [
+                        'project_structure.json',
+                        '<%= jshint.clientSide.src %>',
+                        '<%= jshint.serverSide.src %>'],
                 tasks: ['jshint', 'concat:development']
             },
             html: {
