@@ -1,3 +1,6 @@
+<div class="alert alert-info" ng-show="!vm.connected">
+    Connected
+</div>
 <div class="container chatview-chat-history">
     <div class="row chatview-chat-history-item chatview-chat-history-mine">
         <div class="col-lg-2 col-xs-12">
@@ -19,10 +22,17 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-10">
-            <textarea rows="5" class="form-control chatview-new-entry"></textarea>
+            <textarea ng-model="vm.messageText"
+                      ng-keyup="vm.onKeyUp($event)"
+                      rows="5"
+                      class="form-control chatview-new-entry"
+                      placeholder="Enter message"></textarea>
         </div>
         <div class="col-lg-2" style="child-align: right;">
-            <div class="btn btn-success" style="margin: 10px; width: 100%;">Submit</div>
+            <div class="btn btn-success" style="margin: 10px; width: 100%;"
+                 ng-click="vm.onSubmitMessageClick()">
+                Submit
+            </div>
         </div>
     </div>
 </div>
