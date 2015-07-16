@@ -22,4 +22,15 @@
             });
         });
     }
+
+    function disconnect() {
+        if (stompClient == null) {
+            log.error("Tries to disconnect connection, which is already closed.")
+        } else {
+            stompClient.disconnect();
+            stompClient = null;
+
+            console.log("Disconnected...")
+        }
+    }
 }());
