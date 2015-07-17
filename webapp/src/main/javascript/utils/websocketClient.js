@@ -22,10 +22,11 @@
             stompClient.subscribe('/topic/' + targetTopic, function(message) {
 
                 console.log("Got new message from the server on topic: " + targetTopic);
+                console.log(message);
 
                 if (messageReceiveCallback !== null) {
                     // send received message to callback
-                    messageReceiveCallback(JSON.parse(message.body).content);
+                    messageReceiveCallback(JSON.parse(message.body).messageText);
                 }
             });
         }, function connectionError(errorFrame) {

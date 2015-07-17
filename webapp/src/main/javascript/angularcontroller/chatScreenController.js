@@ -5,14 +5,22 @@
     "use strict";
 
     angular.module("tjaziWebApp")
-        .controller("ChatScreenController", chatScreenController);
+        .controller("ChatScreenController",
+        ["$scope", chatScreenController]);
 
-    function chatScreenController() {
+    function chatScreenController($scope) {
 
         /* jshint validthis: true */
         var vm = this;
 
-        vm.messageText = "";
+        vm.textBoxMessageText = "";
+
+        vm.allReceivedMessages = [];
+
+        vm.allReceivedMessages.push({
+           "sender": "Krzysztof Wasiak",
+            "messageText": "Sample text"
+        });
 
         /*
         /* Mouse and keyboard handlers
@@ -38,18 +46,28 @@
             });
 
         function renderNewMessage(message) {
-            console.log(message);
+            // add new message to the collection of the messages
+            console.log("Adding new message to the collection. Message: " + message);
+            vm.allReceivedMessages.push(
+                {
+                    "sender": "[Unknown]",
+                    "messageText": message
+                }
+            );
+
+            // make sure you update the binding
+            $scope.$apply();
         }
 
         function sendMessage() {
-            var messageText = vm.messageText;
+            var messageText = vm.textBoxMessageText;
 
             if (messageText !== "") {
                 sendMessageOverWebSocket(messageText);
 
                 console.log("Sending message: " + messageText);
 
-                vm.messageText = "";
+                vm.textBoxMessageText = "";
             }
         }
     }
