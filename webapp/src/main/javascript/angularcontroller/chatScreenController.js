@@ -17,10 +17,16 @@
 
         vm.allReceivedMessages = [];
 
-        vm.allReceivedMessages.push({
-           "sender": "Krzysztof Wasiak",
-            "messageText": "Sample text"
-        });
+        vm.allReceivedMessages.push(
+            {
+                "sender": "Krzysztof Wasiak",
+                "messageText": "The karma studies1Chicken breasts combines greatly with bloody marshmellow."
+            },
+            {
+                "sender": "Daniel Ogorzalek",
+                "messageText": "Freedom views when you hurt with bliss.Ales grow on malaria at prison!Anomaly at the alpha quadrant was the mystery of mineral, fighted to a ship-wide green people."
+            }
+        );
 
         /*
         /* Mouse and keyboard handlers
