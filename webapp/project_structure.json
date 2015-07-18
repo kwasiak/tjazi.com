@@ -11,7 +11,10 @@
                   "bower_components/sockjs/sockjs.js",
                   "3rd_party_js_libraries/stomp/stomp.js"],
 
-  "htmlFiles": ["src/main/webapp/WEB-INF/index.html", "src/main/webapp/WEB-INF/templates/**/*.html"],
+  "htmlFiles": [
+      "src/main/webapp/WEB-INF/index.html",
+      "src/main/webapp/WEB-INF/templates/**/*.html",
+      "src/main/webapp/WEB-INF/templatessecure/**/*.html"],
 
   "outputConcatAppJsPath": "src/main/webapp/WEB-INF/js/app.js",
   "outputConcatLibsJsPath": "src/main/webapp/WEB-INF/js/libs.js",

@@ -4,6 +4,7 @@
     var app = angular.module("tjaziWebApp", ["ui.router"]);
 
     var templatesRoot = "templates";
+    var templatesSecureRoot = "templatessecure";
 
     app.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
 
@@ -18,7 +19,7 @@
                         })
                         .state("chatScreen", {
                             url: "/chatscreen",
-                            templateUrl: templatesRoot + "/chatScreen.html",
+                            templateUrl: templatesSecureRoot + "/chatScreen.html",
                             controller: "ChatScreenController as vm"
                         });
 
