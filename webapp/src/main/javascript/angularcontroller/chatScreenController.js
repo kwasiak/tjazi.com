@@ -16,7 +16,14 @@
         vm.textBoxMessageText = "";
         vm.allReceivedMessages = [];
 
-        var webSocketClient = new WebSocketClient();
+        /*
+         /* Mouse and keyboard handlers
+         */
+        vm.onSubmitMessageClick = sendMessage;
+        vm.onKeyUp = handleKeyboardOnNewMessage;
+
+        /* [ENDOF] Mouse and keyboard handlers */
+
 
         vm.allReceivedMessages.push(
             {
@@ -29,20 +36,7 @@
             }
         );
 
-        /*
-        /* Mouse and keyboard handlers
-         */
-        vm.onSubmitMessageClick = function() {
-            sendMessage();
-        };
-
-        vm.onKeyUp = function(eventData) {
-            if (eventData.keyCode === 13 && !eventData.shiftKey) {
-                sendMessage();
-            }
-        };
-
-        /* [ENDOF] Mouse and keyboard handlers */
+        var webSocketClient = new WebSocketClient();
 
         webSocketClient.connectViaWebSocket(
             function connectCallback() {
@@ -51,6 +45,12 @@
             function newMessageCallback(message){
                 renderNewMessage(message);
             });
+
+        function handleKeyboardOnNewMessage(eventData) {
+                if (eventData.keyCode === 13 && !eventData.shiftKey) {
+                    sendMessage();
+                }
+        }
 
         function renderNewMessage(message) {
             // add new message to the collection of the messages
