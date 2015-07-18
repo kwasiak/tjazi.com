@@ -14,8 +14,9 @@
         var vm = this;
 
         vm.textBoxMessageText = "";
-
         vm.allReceivedMessages = [];
+
+        var webSocketClient = new WebSocketClient();
 
         vm.allReceivedMessages.push(
             {
@@ -43,7 +44,7 @@
 
         /* [ENDOF] Mouse and keyboard handlers */
 
-        connectViaWebSocket(
+        webSocketClient.connectViaWebSocket(
             function connectCallback() {
                console.log("Connected to web socket!");
             },
@@ -69,7 +70,7 @@
             var messageText = vm.textBoxMessageText;
 
             if (messageText !== "") {
-                sendMessageOverWebSocket(messageText);
+                webSocketClient.sendMessageOverWebSocket(messageText);
 
                 console.log("Sending message: " + messageText);
 
