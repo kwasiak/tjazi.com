@@ -15,8 +15,6 @@ public class SingleChatroomDriverFactoryImpl implements SingleChatroomDriverFact
     @Override
     public SingleChatroomDriver createSingleChatroomDriver(String chatroomName) {
 
-        
-
         SingleChatroomData chatroomData = new SingleChatroomData();
         chatroomData.setChatroomUuid(UUID.randomUUID());
         chatroomData.setChatroomName(chatroomName);

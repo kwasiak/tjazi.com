@@ -1,10 +1,12 @@
 package com.tjazi.chatroom.service;
 
 import com.tjazi.chatroom.model.SingleChatroomData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -14,7 +16,10 @@ import java.util.UUID;
 @Service
 public class ChatroomServiceImpl implements ChatroomService {
 
-    private List<SingleChatroomData> chatroomData = new ArrayList<>();
+    private List<SingleChatroomDriver> chatroomData = new ArrayList<>();
+
+    @Autowired
+    private SingleChatroomDriverFactory singleChatroomDriverFactory;
 
     @Override
     public boolean isChatroomExist(String chatroomName) {
@@ -24,7 +29,9 @@ public class ChatroomServiceImpl implements ChatroomService {
         }
 
         return chatroomData.stream()
-                .anyMatch(data -> data.getChatroomName().toUpperCase().equals(chatroomName.toUpperCase()));
+                .anyMatch(
+                        data -> data.getChatroomName()
+                                .equalsIgnoreCase(chatroomName));
     }
 
     @Override
@@ -38,31 +45,26 @@ public class ChatroomServiceImpl implements ChatroomService {
             throw new IllegalArgumentException("There's already chatroom with name: " + chatroomName);
         }
 
-        SingleChatroomData chatroomData = new SingleChatroomData();
-        chatroomData.setChatroomName(chatroomName);
+        SingleChatroomDriver chatroomDriver = singleChatroomDriverFactory.createSingleChatroomDriver(chatroomName);
 
-        UUID chatroomUuid = UUID.randomUUID();
-        chatroomData.setChatroomUuid(chatroomUuid);
+        chatroomData.add(chatroomDriver);
 
-        return chatroomUuid;
+        return chatroomDriver.getChatroomUuid();
     }
 
-    @Override
-    public boolean isChatroomHaveUser(String chatroomName, String userName) {
-        return false;
-    }
+    public SingleChatroomDriver fineChatroomByUuid(UUID chatroomUuid) {
 
-    @Override
-    public void addUserToChatroom(String userName) {
-
-    }
-
-    private SingleChatroomData findChatroomByName(String chatroomName) {
-
-        if (chatroomName == null || chatroomName.isEmpty()) {
-            throw new IllegalArgumentException("chatroomName is null or empty");
+        if (chatroomUuid == null) {
+            throw new IllegalArgumentException("chatroomUiid is null");
         }
 
-        chatroomData
+        Optional<SingleChatroomDriver> matchingElement =
+                chatroomData.stream()
+                .filter(element -> element.getChatroomUuid().equals(chatroomUuid))
+                .findFirst();
+
+        // return result of the search or NULL if there's nothing to return
+        return matchingElement.orElse(null);
     }
+
 }

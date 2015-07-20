@@ -14,6 +14,4 @@ public interface SingleChatroomDriver {
     UUID getChatroomUuid();
     String getChatroomName();
     Iterable<String> getChatroomUsers();
-
-
 }
