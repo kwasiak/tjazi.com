@@ -14,9 +14,22 @@
         initControllerModels();
 
         $scope.onContinueButtonClick = function() {
-            $chatroomService.isChatroomExist($scope.chatroomName);
 
-            $scope.chatroomAlreadyExistsError = true;
+            var chatroomName = $scope.chatroomName;
+            var administratorUserName = $scope.administratorUserName;
+
+            $chatroomService.isChatroomExist(chatroomName, function(result) {
+
+                if (result.toString() === "false") {
+                    // init chatroom creation
+                    $chatroomService.createChatroom(chatroomName, administratorUserName, function(result) {
+                        console.log("Chatroom creation finished. Result: " + result);
+                    });
+
+                } else {
+                    $scope.chatroomAlreadyExistsError = true;
+                }
+            });
         };
 
         // make sure we catch the close event
