@@ -16,6 +16,10 @@
 
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="alert alert-danger" role="alert" ng-show="chatroomAlreadyExistsError">
+                <span style="font-weight: bold">Error: </span>
+                Chatroom with given name already exists. Please change the name and try again.
+            </div>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span hidden="true">&times;</span>
