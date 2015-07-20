@@ -1,7 +1,9 @@
 (function () {
     "use strict";
 
-    var app = angular.module("tjaziWebApp", ["ui.router"]);
+    var app = angular.module(
+            "tjaziWebApp",
+            ["webServices", "ui.router"]);
 
     var templatesRoot = "templates";
     var templatesSecureRoot = "templatessecure";

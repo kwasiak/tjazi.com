@@ -32,11 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/**/*.js", "/**/*.css", "/", "/templates/**")
-                .permitAll();
+                .antMatchers("/**/*.js", "/**/*.css", "/", "/templates/**", "/chatroom/**")
+                .permitAll()
+                .and()
+
+                /* TODO: enable csrf for production */
+                .csrf().disable();
 
         httpSecurity
                 .httpBasic().and()
                 .authorizeRequests().antMatchers("/templatessecure/**").authenticated();
+
     }
 }

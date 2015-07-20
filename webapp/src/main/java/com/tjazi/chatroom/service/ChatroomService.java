@@ -9,7 +9,7 @@ public interface ChatroomService {
 
     boolean isChatroomExist(String chatroomName);
     UUID creteNewChatroom(String chatroomName);
-    SingleChatroomDriver fineChatroomByUuid(UUID chatroomUuid);
+    SingleChatroomDriver findChatroomByUuid(UUID chatroomUuid);
 
 
 }

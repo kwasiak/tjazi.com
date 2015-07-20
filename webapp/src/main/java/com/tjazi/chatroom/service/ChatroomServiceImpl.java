@@ -52,7 +52,7 @@ public class ChatroomServiceImpl implements ChatroomService {
         return chatroomDriver.getChatroomUuid();
     }
 
-    public SingleChatroomDriver fineChatroomByUuid(UUID chatroomUuid) {
+    public SingleChatroomDriver findChatroomByUuid(UUID chatroomUuid) {
 
         if (chatroomUuid == null) {
             throw new IllegalArgumentException("chatroomUiid is null");
