@@ -24,6 +24,7 @@
                     // init chatroom creation
                     $chatroomService.createChatroom(chatroomName, administratorUserName, function(result) {
                         console.log("Chatroom creation finished. Result: " + result);
+                        $scope.chatroomAlreadyExistsError = false;
                     });
 
                 } else {

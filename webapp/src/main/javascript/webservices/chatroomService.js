@@ -23,7 +23,7 @@
                     console.log("_isChatroomExist, got success response from server. Data: " + data);
 
                     if (existsResultCallback) {
-                        existsResultCallback(data);
+                        existsResultCallback(data.chatroomExists);
                     }
                 })
                 .error(reportHttpErrorToConsole);
@@ -31,14 +31,18 @@
 
         function _createChatroom(chatroomName, administratorUserName, resultCallback) {
 
-            var postObject = {"chatroomName" : chatroomName, "administratorUserName": administratorUserName};
+            var postObject =
+            {
+                "chatroomName" : chatroomName,
+                "chatroomAdministratorUserName": administratorUserName
+            };
 
             $http.post(CREATE_CHATROOM_URL, postObject)
                 .success(function(data) {
                     console.log("_createChatroom, got success response from server. Data: " + data);
 
                     if (resultCallback) {
-                        resultCallback(data);
+                        resultCallback(data.createChatroomResult);
                     }
                 })
                 .error(reportHttpErrorToConsole);
