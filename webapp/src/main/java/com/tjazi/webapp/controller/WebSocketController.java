@@ -1,6 +1,7 @@
 package com.tjazi.webapp.controller;
 
 import com.tjazi.webapp.messages.ChatMessage;
+import com.tjazi.webapp.messages.ChatMessageReceiverType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,20 @@ public class WebSocketController {
             return;
         }
 
+        String receiver = chatMessage.getReceiver();
+        if (receiver == null || receiver.isEmpty()) {
+            log.error("Can't figure-out who's the receiver of the message. Rejecting message.");
+            return;
+        }
+
+        ChatMessageReceiverType receiverType = chatMessage.getReceiverType();
+        if (receiverType == null || receiverType == ChatMessageReceiverType.USER) {
+            log.error("Got null or unsupported receiver type ('{}'). Rejecting message.", receiverType);
+            return;
+        }
+
+        Start coding here!!!
+
         String messageSenderName = principal.getName();
 
         log.debug("Message sender: {}, payload: {}", messageSenderName, chatMessage.getMessageText());
@@ -66,5 +81,11 @@ public class WebSocketController {
         chatMessage.setSenderUserName(principal.getName());
 
         template.convertAndSend("/topic/chatroom1", chatMessage);
+    }
+
+    private boolean isUserValidForChatroom(String userName, String chatroomName) {
+
+        /*TODO: add more logic checking if user belongs to the particular group */
+        return true;
     }
 }
