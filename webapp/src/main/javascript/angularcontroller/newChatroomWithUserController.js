@@ -15,46 +15,70 @@
         /* jshint validthis: true */
         initControllerModels();
 
-        $scope.onContinueButtonClick = function() {
 
-            var chatroomName = $scope.chatroomName;
-            var administratorUserName = $scope.administratorUserName;
+        /*
+                    EVENT WIRING
+         */
 
-            $chatroomService.isChatroomExist(chatroomName, function(result) {
-
-                if (result.toString() === "false") {
-                    // init chatroom creation
-                    $chatroomService.createChatroom(chatroomName, administratorUserName, function(result) {
-                        console.log("Chatroom creation finished. Result: " + result);
-                        $scope.chatroomAlreadyExistsError = false;
-
-                        // time to authenticate user
-                        $securityService.authenticateUser(administratorUserName, chatroomName,
-                            function(token, isAuthenticated) {
-                                console.log("Authentication finished. Token: " + token + ", authenticated?: " + isAuthenticated);
-
-                                if (token && token !== "" && isAuthenticated) {
-
-                                    // close the dialog
-                                    $('#' + DIALOG_ID).modal('hide');
-
-                                    // move to the chatroom
-                                    $state.go("chatScreen");
-                                }
-                            });
-                    });
-
-                } else {
-                    $scope.chatroomAlreadyExistsError = true;
-                }
-            });
-        };
+        $scope.onContinueButtonClick = continueButtonClick;
 
         // make sure we catch the close event
         // this is jQuery call
-        $('#' + DIALOG_ID).on('hidden.bs.modal', function() {
+        $('#' + DIALOG_ID).on('hidden.bs.modal', modalDialogClosed);
+
+
+        /*
+                    END OF EVENTS WIRING
+         */
+
+        function modalDialogClosed() {
             resetForm();
-        });
+        }
+
+        function continueButtonClick() {
+            var chatroomName = $scope.chatroomName;
+
+            $chatroomService.isChatroomExist(chatroomName, isChatroomExistResult);
+        }
+
+        function isChatroomExistResult(result) {
+            if (result.toString() === "false") {
+
+                var administratorUserName = $scope.administratorUserName;
+                var chatroomName = $scope.chatroomName;
+
+                // init chatroom creation
+                $chatroomService.createChatroom(chatroomName, administratorUserName, createChatroomResult);
+
+            } else {
+                $scope.chatroomAlreadyExistsError = true;
+            }
+        }
+
+        function createChatroomResult(result) {
+            console.log("Chatroom creation finished. Result: " + result);
+            $scope.chatroomAlreadyExistsError = false;
+
+            var administratorUserName = $scope.administratorUserName;
+            var chatroomName = $scope.chatroomName;
+
+            // time to authenticate user
+            $securityService.authenticateUser(administratorUserName, chatroomName,
+                authenticationResult);
+        }
+
+        function authenticationResult(token, isAuthenticated) {
+            console.log("Authentication finished. Token: " + token + ", authenticated?: " + isAuthenticated);
+
+            if (token && token !== "" && isAuthenticated) {
+
+                // close the dialog
+                $('#' + DIALOG_ID).modal('hide');
+
+                // move to the chatroom
+                $state.go("chatScreen");
+            }
+        }
 
         function initControllerModels() {
             $scope.chatroomName = "";
