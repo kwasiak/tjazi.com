@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/**/*.js", "/**/*.css", "/", "/templates/**", "/chatroom/**")
+                .antMatchers("/**/*.js", "/**/*.css", "/", "/templates/**", "/templatessecure/**", "/chatroom/**")
                 .permitAll()
                 .and()
 
@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .httpBasic().and()
-                .authorizeRequests().antMatchers("/templatessecure/**").authenticated();
+                .authorizeRequests().antMatchers("/security/**").authenticated();
 
     }
 }

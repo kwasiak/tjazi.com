@@ -6,9 +6,11 @@
 
     angular.module("tjaziWebApp")
         .controller("NewChatroomWithUserController",
-                ["$chatroomService", "$scope", chatroomWithUserController]);
+                ["$chatroomService", "$securityService", "$scope", "$state", chatroomWithUserController]);
 
-    function chatroomWithUserController($chatroomService, $scope) {
+    function chatroomWithUserController($chatroomService, $securityService, $scope, $state) {
+
+        var DIALOG_ID = "dlgUserChatName";
 
         /* jshint validthis: true */
         initControllerModels();
@@ -25,6 +27,21 @@
                     $chatroomService.createChatroom(chatroomName, administratorUserName, function(result) {
                         console.log("Chatroom creation finished. Result: " + result);
                         $scope.chatroomAlreadyExistsError = false;
+
+                        // time to authenticate user
+                        $securityService.authenticateUser(administratorUserName, chatroomName,
+                            function(token, isAuthenticated) {
+                                console.log("Authentication finished. Token: " + token + ", authenticated?: " + isAuthenticated);
+
+                                if (token && token !== "" && isAuthenticated) {
+
+                                    // close the dialog
+                                    $('#' + DIALOG_ID).modal('hide');
+
+                                    // move to the chatroom
+                                    $state.go("chatScreen");
+                                }
+                            });
                     });
 
                 } else {
@@ -35,7 +52,7 @@
 
         // make sure we catch the close event
         // this is jQuery call
-        $('#dlgUserChatName').on('hidden.bs.modal', function() {
+        $('#' + DIALOG_ID).on('hidden.bs.modal', function() {
             resetForm();
         });
 
