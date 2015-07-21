@@ -1,15 +1,15 @@
 package com.tjazi.webapp.controller;
 
-import com.tjazi.webapp.model.ChatMessage;
+import com.tjazi.webapp.messages.ChatMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import sun.net.www.MessageHeader;
 
 import java.security.Principal;
 
@@ -22,12 +22,16 @@ public class WebSocketController {
 
     private static final Logger log = LoggerFactory.getLogger(WebSocketController.class);
 
-    @MessageMapping("/messages")
+    @Autowired
+    private SimpMessagingTemplate template;
+
+
+    /*@MessageMapping("/messages")
     @SendTo("/topic/chatroom1")
     public ChatMessage handleChatMessage(
             @Payload ChatMessage message,
            // @DestinationVariable("chatRoomId") String chatRoomId,
-            MessageHeaders messageHeaders/*, Principal user*/) throws Exception {
+            MessageHeaders messageHeaders*//*, Principal user*//*) throws Exception {
 
         if (message == null) {
             log.error("handleChatMessage >>> Got null message!!!");
@@ -42,5 +46,25 @@ public class WebSocketController {
         log.info("handleChatMessage >>> Got new message: " + messageText);
 
         return new ChatMessage(messageText);
+    }*/
+
+    @MessageMapping("/messages")
+    public void handleChatMessage(Message<Object> message, @Payload ChatMessage chatMessage) throws Exception {
+
+        Principal principal = message.getHeaders().get(SimpMessageHeaderAccessor.USER_HEADER, Principal.class);
+
+        if (principal == null) {
+            log.error("Got a message, but can't identify the sender. Rejecting message.");
+            return;
+        }
+
+        String messageSenderName = principal.getName();
+
+        log.debug("Message sender: {}, payload: {}", messageSenderName, chatMessage.getMessageText());
+
+        // fill the sender field and re-send to the chat
+        chatMessage.setSenderUserName(principal.getName());
+
+        template.convertAndSend("/topic/chatroom1", chatMessage);
     }
 }

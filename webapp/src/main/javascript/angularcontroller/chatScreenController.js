@@ -42,8 +42,8 @@
             function connectCallback() {
                console.log("Connected to web socket!");
             },
-            function newMessageCallback(message){
-                renderNewMessage(message);
+            function newMessageCallback(messageObject){
+                renderNewMessage(messageObject);
             });
 
         function handleKeyboardOnNewMessage(eventData) {
@@ -52,13 +52,13 @@
                 }
         }
 
-        function renderNewMessage(message) {
+        function renderNewMessage(messageObject) {
             // add new message to the collection of the messages
-            console.log("Adding new message to the collection. Message: " + message);
+            console.log("Adding new message to the collection. Message: " + messageObject);
             vm.allReceivedMessages.push(
                 {
-                    "sender": "[Unknown]",
-                    "messageText": message
+                    "sender": messageObject.senderUserName,
+                    "messageText": messageObject.messageText
                 }
             );
 

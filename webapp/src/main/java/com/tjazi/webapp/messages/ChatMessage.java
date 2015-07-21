@@ -1,4 +1,4 @@
-package com.tjazi.webapp.model;
+package com.tjazi.webapp.messages;
 
 /**
  * Created by kwasiak on 16/07/15.
@@ -6,6 +6,7 @@ package com.tjazi.webapp.model;
 public class ChatMessage {
 
     private String messageText;
+    private String senderUserName;
 
     public ChatMessage() { }
 
@@ -19,5 +20,13 @@ public class ChatMessage {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public String getSenderUserName() {
+        return senderUserName;
+    }
+
+    public void setSenderUserName(String senderUserName) {
+        this.senderUserName = senderUserName;
     }
 }

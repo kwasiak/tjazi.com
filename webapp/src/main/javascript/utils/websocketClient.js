@@ -26,8 +26,10 @@ var WebSocketClient = function () {
                     console.log(message);
 
                     if (messageReceiveCallback !== null) {
+
+                        var receivedMessageObject = JSON.parse(message.body);
                         // send received message to callback
-                        messageReceiveCallback(JSON.parse(message.body).messageText);
+                        messageReceiveCallback(receivedMessageObject);
                     }
                 });
             }, function connectionError(errorFrame) {
