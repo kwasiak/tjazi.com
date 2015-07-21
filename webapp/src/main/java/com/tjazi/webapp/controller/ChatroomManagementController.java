@@ -1,6 +1,8 @@
 package com.tjazi.webapp.controller;
 
 import com.tjazi.chatroom.service.ChatroomService;
+import com.tjazi.chatroom.service.SingleChatroomDriver;
+import com.tjazi.webapp.messages.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,10 @@ public class ChatroomManagementController {
     private static final Logger log = LoggerFactory.getLogger(ChatroomManagementController.class);
 
     @RequestMapping(value = "/isexist", method = RequestMethod.POST)
-    public boolean isChatroomExist(
-            @RequestBody String chatroomName) {
+    public IsChatroomExistResponseMessage isChatroomExist(
+            @RequestBody IsChatroomExistMessage chatroomData) {
+
+        String chatroomName = chatroomData.getChatroomName();
 
         log.debug("Checking if chatroom with name: '{}' exists.", chatroomName);
 
@@ -34,34 +38,44 @@ public class ChatroomManagementController {
             // return that chatroom exists
 
             log.error("Passed null or empty chatroomName!!!");
-            return true;
+
+            return new IsChatroomExistResponseMessage(true);
         }
 
         Boolean chatroomExists = chatroomService.isChatroomExist(chatroomName);
 
         log.debug("Chatroom '{}' exists? {}", chatroomName, chatroomExists.toString());
 
-        return chatroomExists;
+        return new IsChatroomExistResponseMessage(chatroomExists);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createChatroom(
-            @RequestBody String chatroomName) {
+    public CreateChatroomResponseMessage createChatroom(
+            @RequestBody CreateChatroomMessage createChatroomMessage) {
 
-        if (chatroomName == null || chatroomName.isEmpty()) {
+        try {
+            String chatroomName = createChatroomMessage.getChatroomName();
+            String userName = createChatroomMessage.getChatroomAdministratorUserName();
 
-            log.error("Passed null or empty chatroomName!!!");
-            return "CHATROOM_NAME_EMPTY";
+            log.debug("Got request to create chatroom. Name: '{}'", chatroomName);
+
+            if (chatroomService.isChatroomExist(chatroomName)) {
+                return new CreateChatroomResponseMessage(CreateChatroomResult.CHATROOM_EXISTS);
+            }
+
+            log.debug("Adding administrator to the chatroom. Administrator: '{}'", userName);
+
+            SingleChatroomDriver chatroomDriver = chatroomService.createNewChatroom(chatroomName);
+
+            // because this is new chatroom, there's no need to check if user already exists
+            chatroomDriver.addUserToChatroom(userName);
+        }
+        catch (Exception ex) {
+
+            log.error("Exception when processing CreateChatroomMessage message. Details:\n" + ex);
+            return new CreateChatroomResponseMessage(CreateChatroomResult.GENERAL_ERROR);
         }
 
-        if (chatroomService.isChatroomExist(chatroomName)) {
-
-            log.error("Chatroom '{}' already exists!!!", chatroomName);
-            return "CHATROOM_EXISTS";
-        }
-
-        chatroomService.creteNewChatroom(chatroomName);
-
-        return "OK";
+        return new CreateChatroomResponseMessage(CreateChatroomResult.OK);
     }
 }

@@ -8,7 +8,14 @@ import java.util.UUID;
 public interface ChatroomService {
 
     boolean isChatroomExist(String chatroomName);
-    UUID creteNewChatroom(String chatroomName);
+
+    /**
+     * Create single chatroom and return its driver
+     * @param chatroomName - Name of the chatroom
+     * @return Chatroom driver
+     */
+    SingleChatroomDriver createNewChatroom(String chatroomName);
+
     SingleChatroomDriver findChatroomByUuid(UUID chatroomUuid);
 
 

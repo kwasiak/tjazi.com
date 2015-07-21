@@ -35,7 +35,7 @@ public class ChatroomServiceImpl implements ChatroomService {
     }
 
     @Override
-    public UUID creteNewChatroom(String chatroomName) {
+    public SingleChatroomDriver createNewChatroom(String chatroomName) {
 
         if (chatroomName == null || chatroomName.isEmpty()) {
             throw new IllegalArgumentException("chatroomName is null or empty");
@@ -49,7 +49,7 @@ public class ChatroomServiceImpl implements ChatroomService {
 
         chatroomData.add(chatroomDriver);
 
-        return chatroomDriver.getChatroomUuid();
+        return chatroomDriver;
     }
 
     public SingleChatroomDriver findChatroomByUuid(UUID chatroomUuid) {
