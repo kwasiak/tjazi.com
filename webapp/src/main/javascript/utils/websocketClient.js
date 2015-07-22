@@ -39,8 +39,8 @@ var WebSocketClient = function () {
 
     var _sendMessageOverWebSocket = function (messageText) {
 
-        if (messageText === null || messageText === "") {
-            // do nothing if message is empty
+        if (!messageText) {
+            // do nothing if message is empty, null, etc.
             return;
         }
 
@@ -49,7 +49,9 @@ var WebSocketClient = function () {
         } else {
             stompClient.send("/app" + endpointName, {},
                 JSON.stringify({
-                    "messageText": messageText
+                    "messageText": messageText,
+                    "receiver": "chatroom1",
+                    "receiverType": "CHATROOM"
                 }));
         }
     };

@@ -67,4 +67,18 @@ public class ChatroomServiceImpl implements ChatroomService {
         return matchingElement.orElse(null);
     }
 
+    @Override
+    public SingleChatroomDriver findChatroomByName(String chatroomName) {
+
+        if (chatroomName == null || chatroomName.isEmpty()) {
+            throw new IllegalArgumentException("chatroomName is null or empty.");
+        }
+
+        Optional<SingleChatroomDriver> matchingElement =
+                chatroomData.stream()
+                        .filter(element -> element.getChatroomName().equalsIgnoreCase(chatroomName))
+                        .findFirst();
+
+        return matchingElement.orElse(null);
+    }
 }

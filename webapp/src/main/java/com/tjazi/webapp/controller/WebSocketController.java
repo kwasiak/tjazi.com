@@ -1,5 +1,7 @@
 package com.tjazi.webapp.controller;
 
+import com.tjazi.chatroom.service.ChatroomService;
+import com.tjazi.chatroom.service.SingleChatroomDriver;
 import com.tjazi.webapp.messages.ChatMessage;
 import com.tjazi.webapp.messages.ChatMessageReceiverType;
 import org.slf4j.Logger;
@@ -26,28 +28,9 @@ public class WebSocketController {
     @Autowired
     private SimpMessagingTemplate template;
 
+    @Autowired
+    private ChatroomService chatroomService;
 
-    /*@MessageMapping("/messages")
-    @SendTo("/topic/chatroom1")
-    public ChatMessage handleChatMessage(
-            @Payload ChatMessage message,
-           // @DestinationVariable("chatRoomId") String chatRoomId,
-            MessageHeaders messageHeaders*//*, Principal user*//*) throws Exception {
-
-        if (message == null) {
-            log.error("handleChatMessage >>> Got null message!!!");
-        }
-
-        String messageText = message.getMessageText();
-
-        if (messageText == null || messageText == "") {
-            log.error("handleChatMessage >>> Got a message with null or empty content!!!");
-        }
-
-        log.info("handleChatMessage >>> Got new message: " + messageText);
-
-        return new ChatMessage(messageText);
-    }*/
 
     @MessageMapping("/messages")
     public void handleChatMessage(Message<Object> message, @Payload ChatMessage chatMessage) throws Exception {
@@ -71,21 +54,39 @@ public class WebSocketController {
             return;
         }
 
-        Start coding here!!!
-
         String messageSenderName = principal.getName();
 
-        log.debug("Message sender: {}, payload: {}", messageSenderName, chatMessage.getMessageText());
+        /**********************************
+        // tjazi doesn't support user to user yet, so from this point we can assume we have chatroom name
+        // as a receiver
+         /********************************/
+
+        if (!isUserValidForChatroom(messageSenderName, receiver)) {
+            log.error("Got message from user: '{}', but (s)he doesn't have permission to chatroom: '{}' " +
+                            "or that chatroom doesn't exists. Dropping message.",
+                    messageSenderName, receiver);
+            return;
+        }
+
+        log.debug("Message accepted. sender: {}, payload: {}, sending to receiver: {} (type: {})",
+                messageSenderName, chatMessage.getMessageText(), receiver, receiverType);
 
         // fill the sender field and re-send to the chat
-        chatMessage.setSenderUserName(principal.getName());
+        chatMessage.setSenderUserName(messageSenderName);
 
         template.convertAndSend("/topic/chatroom1", chatMessage);
     }
 
     private boolean isUserValidForChatroom(String userName, String chatroomName) {
 
-        /*TODO: add more logic checking if user belongs to the particular group */
-        return true;
+        // check if that chatroom really exists
+        SingleChatroomDriver chatroomDriver = chatroomService.findChatroomByName(chatroomName);
+
+        if (chatroomDriver == null) {
+            log.error("Can't find chatroom with given name ('{}'). Dropping message.", chatroomName);
+            return false;
+        }
+
+        return chatroomDriver.isUserInChatroom(userName);
     }
 }

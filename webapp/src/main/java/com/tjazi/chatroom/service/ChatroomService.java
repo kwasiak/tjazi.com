@@ -18,5 +18,7 @@ public interface ChatroomService {
 
     SingleChatroomDriver findChatroomByUuid(UUID chatroomUuid);
 
+    SingleChatroomDriver findChatroomByName(String chatroomName);
+
 
 }

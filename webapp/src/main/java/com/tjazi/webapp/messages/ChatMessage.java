@@ -1,5 +1,7 @@
 package com.tjazi.webapp.messages;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
 /**
  * Created by kwasiak on 16/07/15.
  * THis is message record, which is sent via WebSocket to / from the browser
@@ -45,7 +47,22 @@ public class ChatMessage {
         return receiverType;
     }
 
-    public void setReceiverType(ChatMessageReceiverType receiverType) {
-        this.receiverType = receiverType;
+    /**
+     * This method will be used to handle serialization from incomming string value to enum
+     * This is needed, because of format of the string value doesn't fall into enum values,
+     * there will be nasty exception thrown by Spring in the logs, which is not possible to mitigate.
+     *
+     * @param receiverType Receiver type (value allowed as per ChatMessageReceiverType enum)
+     */
+    public void setReceiverType(String receiverType)
+    {
+        try
+        {
+            this.receiverType = Enum.valueOf(ChatMessageReceiverType.class, receiverType);
+        }
+        catch (IllegalArgumentException ex)
+        {
+            this.receiverType = null;
+        }
     }
 }
