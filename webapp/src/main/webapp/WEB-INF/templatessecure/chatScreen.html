@@ -1,32 +1,33 @@
-<p>
-    <div class="row" style="margin: 10px 0px;"
-         ng-repeat="message in vm.allReceivedMessages">
-        <div class="container">
-            <div class="row">
-                <div style="background: #eeeeee; font-weight: bold; font-size: 11px; padding: 5px 10px; display: inline-block;">
-                    {{message.sender}}
+<div id="chat">
+    <div id="chatHistory" style="overflow-y: auto; overflow-x: hidden">
+        <div class="row" style="margin: 10px 0px; "
+             ng-repeat="message in vm.allReceivedMessages">
+            <div style="margin: 0px 10px">
+                <div class="row">
+                    <div style="background: #eeeeee; font-weight: bold;
+                                font-size: 11px; padding: 5px 10px; display: inline-block;">
+                        {{message.sender}}
+                    </div>
+                </div>
+                <div class="row" style="padding: 10px; border: solid 1px #cccccc;">
+                    {{message.messageText}}
                 </div>
             </div>
-            <div class="row" style="padding: 10px; border: solid 1px #cccccc;">
-                {{message.messageText}}
-            </div>
         </div>
     </div>
-</p>
-<p style="border-bottom: solid 1px #cccccc; ">
-    <div class="row">
-        <div class="col-xs-7 col-sm-8 col-lg-10">
-            <textarea ng-model="vm.textBoxMessageText"
-                      ng-keyup="vm.onKeyUp($event)"
-                      rows="5"
-                      class="form-control chatview-new-entry"
-                      placeholder="Enter message"></textarea>
-        </div>
-        <div class="col-xs-5 col-sm-4 col-lg-2" style="child-align: right;">
-            <div class="btn btn-success" style="width: 100%;"
-                 ng-click="vm.onSubmitMessageClick()">
-                Submit
+    <div id="chatNewMessage" class="row" style="margin: 15px 0px;">
+            <div class="col-xs-7 col-sm-8 col-lg-10">
+                <textarea ng-model="vm.textBoxMessageText"
+                          ng-keyup="vm.onKeyUp($event)"
+                          rows="1"
+                          class="form-control chatview-new-entry"
+                          placeholder="Enter message"></textarea>
             </div>
-        </div>
+            <div class="col-xs-5 col-sm-4 col-lg-2" style="child-align: right;">
+                <div class="btn btn-success" style="width: 100%;"
+                     ng-click="vm.onSubmitMessageClick()">
+                    Submit
+                </div>
+            </div>
     </div>
-</p>
+</div>

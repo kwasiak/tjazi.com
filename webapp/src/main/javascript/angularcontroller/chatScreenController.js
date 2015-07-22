@@ -24,6 +24,15 @@
 
         /* [ENDOF] Mouse and keyboard handlers */
 
+        resizeChatWindow();
+
+        $(window).load(function() {
+            resizeChatWindow();
+        });
+
+        $(window).resize(function(){ // On resize
+            resizeChatWindow();
+        });
 
         vm.allReceivedMessages.push(
             {
@@ -45,6 +54,11 @@
             function newMessageCallback(messageObject){
                 renderNewMessage(messageObject);
             });
+
+        function resizeChatWindow() {
+            var otherElementsSize = $('#topBanner').height() + $('#chatNewMessage').height() + /*margin*/ 15 * 2;
+            $('#chatHistory').css({'height':(($(window).height() - otherElementsSize))+'px'});
+        }
 
         function handleKeyboardOnNewMessage(eventData) {
                 if (eventData.keyCode === 13 && !eventData.shiftKey) {
