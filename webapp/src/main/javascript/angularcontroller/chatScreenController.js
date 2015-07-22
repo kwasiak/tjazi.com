@@ -56,8 +56,9 @@
             });
 
         function resizeChatWindow() {
-            var otherElementsSize = $('#topBanner').height() + $('#chatNewMessage').height() + /*margin*/ 15 * 2;
-            $('#chatHistory').css({'height':(($(window).height() - otherElementsSize))+'px'});
+            var otherElementsSizeY = $('#topBanner').height() + $('#chatNewMessage').height() + /*margin*/ 15 * 2;
+            $('#chatHistory').css({'height':(($(window).height() - otherElementsSizeY))+'px'});
+
         }
 
         function handleKeyboardOnNewMessage(eventData) {
