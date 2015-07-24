@@ -56,7 +56,12 @@
             });
 
         function resizeChatWindow() {
-            var otherElementsSizeY = $('#topBanner').height() + $('#chatNewMessage').height() + /*margin*/ 20 * 2 + 10;
+            var topBannerHeight = $('#topBanner').outerHeight(true);
+            var charHeaderHeight = $('#chatHeader').outerHeight(true);
+            var newMessageHeight = $('#chatNewMessage').outerHeight(true);
+            var marginAndAlignment = 20 * 2 + 10;
+
+            var otherElementsSizeY = topBannerHeight + newMessageHeight + charHeaderHeight + marginAndAlignment;
             $('#chatHistory').css({'height':(($(window).height() - otherElementsSizeY))+'px'});
 
         }
