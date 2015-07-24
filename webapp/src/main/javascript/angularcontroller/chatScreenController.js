@@ -56,7 +56,7 @@
             });
 
         function resizeChatWindow() {
-            var otherElementsSizeY = $('#topBanner').height() + $('#chatNewMessage').height() + /*margin*/ 15 * 2;
+            var otherElementsSizeY = $('#topBanner').height() + $('#chatNewMessage').height() + /*margin*/ 20 * 2 + 10;
             $('#chatHistory').css({'height':(($(window).height() - otherElementsSizeY))+'px'});
 
         }

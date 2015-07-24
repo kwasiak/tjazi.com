@@ -13,16 +13,16 @@
 </head>
 <body ng-app="tjaziWebApp">
 
-    <div id="topBanner" class="container" style="width: 100%;">
-        <div class="row">
-            <header style="background-color: darkgray; padding: 0.7em; height: 50px; color: white; font-size: large;">
-                <a href="/" style="color: white; text-decoration: none;">tjazi.com</a>
+    <div id="topBanner" style="width: 100%;">
+        <div>
+            <header style="background-color: darkgray; height: 50px; line-height: 50px; white-space: nowrap; font-size: large;">
+                <a href="/" style="color: white; text-decoration: none; margin-left: 20px;">tjazi.com</a>
             </header>
         </div>
 
         <nav id="sideNavParent"
              style="background: black; position: absolute;
-             left: 0em; width: 13em; height: 100%; color: whitesmoke; margin-top: -50px; z-index: -1;
+             left: 0em; width: 200px; height: 100%; color: whitesmoke; margin-top: -50px; z-index: -1;
              padding-top: 50px;">
             <ul>
                 <li>Krzys</li>
@@ -31,8 +31,8 @@
         </nav>
     </div>
 
-    <div class="container" style="margin-left: 14em; margin-top: 0.5em; width: 85%">
-        <div class="row">
+    <div style="margin-left: 214px; margin-right: 14px;">
+        <div>
             <div ui-view=""></div>
         </div>
     </div>
