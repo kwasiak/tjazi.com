@@ -15,9 +15,6 @@ public class HomeController {
 
     private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 
-    @Autowired
-    private ResourceUrlProvider resourceUrlProvider;
-
     @RequestMapping(value = {"/", "index", "index.html"}, method = RequestMethod.GET)
     public String index() {
 
