@@ -9,15 +9,24 @@ public class GetChatroomPropertiesResponseMessage {
 
     private GetChatroomPropertiesResult result;
     private String chatroomName;
+    private String currentUserName;
     private List<String> chatroomUsers;
 
     public GetChatroomPropertiesResponseMessage() {
     }
 
+    public GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult result) {
+        this(result, null, null, null);
+    }
+
     public GetChatroomPropertiesResponseMessage(
-            GetChatroomPropertiesResult result, String chatroomName, List<String> chatroomUsers) {
+            GetChatroomPropertiesResult result,
+            String chatroomName,
+            String currentUserName,
+            List<String> chatroomUsers) {
         this.result = result;
         this.chatroomName = chatroomName;
+        this.currentUserName = currentUserName;
         this.chatroomUsers = chatroomUsers;
     }
 
@@ -35,6 +44,14 @@ public class GetChatroomPropertiesResponseMessage {
 
     public void setChatroomName(String chatroomName) {
         this.chatroomName = chatroomName;
+    }
+
+    public String getCurrentUserName() {
+        return currentUserName;
+    }
+
+    public void setCurrentUserName(String currentUserName) {
+        this.currentUserName = currentUserName;
     }
 
     public List<String> getChatroomUsers() {

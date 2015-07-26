@@ -36,14 +36,14 @@ public class ChatroomProperties {
         if (getChatroomPropertiesMessage == null) {
             log.error("Got null getChatroomPropertiesMessage.");
 
-            return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.WRONG_PARAMETERS, null, null);
+            return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.WRONG_PARAMETERS);
         }
 
         UUID chatroomUuid = getChatroomPropertiesMessage.getChatroomUuid();
 
         if (chatroomUuid == null) {
             log.error("Got null Chatroom UUID in getChatroomPropertiesMessage");
-            return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.WRONG_PARAMETERS, null, null);
+            return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.WRONG_PARAMETERS);
         }
 
         final SingleChatroomDriver singleChatroomDriver = chatroomService.findChatroomByUuid(chatroomUuid);
@@ -58,8 +58,7 @@ public class ChatroomProperties {
         if (auth == null) {
             log.error("Not authenticated user attempted to download properties of chatroom '{}' (GUID: {})",
                     singleChatroomDriver.getChatroomName(), singleChatroomDriver.getChatroomUuid());
-            return new GetChatroomPropertiesResponseMessage(
-                    GetChatroomPropertiesResult.PERMISSION_DENIED, null, null);
+            return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.PERMISSION_DENIED);
         }
 
         String authenticatedUserName = auth.getName();
@@ -67,14 +66,14 @@ public class ChatroomProperties {
         if (!singleChatroomDriver.isUserInChatroom(authenticatedUserName)) {
             log.error("User '{}' is authenticated, but doesn't belong to chatroom '{}' (GUID: {}). Permission denied.",
                     singleChatroomDriver.getChatroomName(), singleChatroomDriver.getChatroomUuid());
-            return new GetChatroomPropertiesResponseMessage(
-                    GetChatroomPropertiesResult.PERMISSION_DENIED, null, null);
+            return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.PERMISSION_DENIED);
         }
 
         // all fine - return the chatroom data!!!
         return new GetChatroomPropertiesResponseMessage(
                 GetChatroomPropertiesResult.OK,
                 singleChatroomDriver.getChatroomName(),
+                auth.getName(),
                 singleChatroomDriver.getChatroomUsers()
         );
     }

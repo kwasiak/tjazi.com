@@ -22,6 +22,7 @@
         vm.textBoxMessageText = "";
         vm.allReceivedMessages = [];
         vm.chatroomName = "";
+        vm.currentUserName = "";
 
         /*
          /* Mouse and keyboard handlers
@@ -64,6 +65,7 @@
 
             if (chatroomProperties && chatroomProperties.result === "OK") {
                 vm.chatroomName = chatroomProperties.chatroomName;
+                vm.currentUserName = chatroomProperties.currentUserName;
 
                 connectViaWebSocket();
 
