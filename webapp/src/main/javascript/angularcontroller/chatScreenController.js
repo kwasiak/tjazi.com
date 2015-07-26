@@ -6,15 +6,22 @@
 
     angular.module("tjaziWebApp")
         .controller("ChatScreenController",
-        ["$scope", chatScreenController]);
+        ["$scope", "$stateParams", "$state", "$chatroomService", chatScreenController]);
 
-    function chatScreenController($scope) {
+    function chatScreenController($scope, $stateParams, $state, $chatroomService) {
 
         /* jshint validthis: true */
         var vm = this;
 
+        if (!assertInputParametersAreOk()) {
+            console.error("There's no chatroomUuid passed to ChatScreenController. Moving back to home");
+
+            navigateToHomeController();
+        }
+
         vm.textBoxMessageText = "";
         vm.allReceivedMessages = [];
+        vm.chatroomName = "";
 
         /*
          /* Mouse and keyboard handlers
@@ -45,15 +52,47 @@
             }
         );
 
-        var webSocketClient = new WebSocketClient();
+        // proceed only of entry parameters are ok
+        if (assertInputParametersAreOk()) {
 
-        webSocketClient.connectViaWebSocket(
-            function connectCallback() {
-               console.log("Connected to web socket!");
-            },
-            function newMessageCallback(messageObject){
-                renderNewMessage(messageObject);
-            });
+            $chatroomService.getChatroomProperties(
+                $stateParams.chatroomUuid,
+                getChatroomPropertiesResult);
+        }
+
+        function getChatroomPropertiesResult(chatroomProperties) {
+
+            if (chatroomProperties && chatroomProperties.result === "OK") {
+                vm.chatroomName = chatroomProperties.chatroomName;
+
+                connectViaWebSocket();
+
+                // all set to go...
+
+            } else {
+                navigateToHomeController();
+            }
+        }
+
+        function navigateToHomeController() {
+            $state.go("home");
+        }
+
+        function connectViaWebSocket() {
+            var webSocketClient = new WebSocketClient();
+
+            webSocketClient.connectViaWebSocket(
+                function connectCallback() {
+                    console.log("Connected to web socket!");
+                },
+                function newMessageCallback(messageObject) {
+                    renderNewMessage(messageObject);
+                });
+        }
+
+        function assertInputParametersAreOk() {
+            return $stateParams && $stateParams.chatroomUuid;
+        }
 
         function resizeChatWindow() {
             var topBannerHeight = $('#topBanner').outerHeight(true);
@@ -63,7 +102,6 @@
 
             var otherElementsSizeY = topBannerHeight + newMessageHeight + charHeaderHeight + marginAndAlignment;
             $('#chatHistory').css({'height':(($(window).height() - otherElementsSizeY))+'px'});
-
         }
 
         function handleKeyboardOnNewMessage(eventData) {

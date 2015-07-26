@@ -12,6 +12,7 @@
 
     var IS_CHAT_EXIST_URL = "/chatroom/isexist";
     var CREATE_CHATROOM_URL = "/chatroom/create";
+    var GET_CHATROOM_PROPERTIES_URL = "/chatroom/properties";
 
     function ChatroomService($http) {
 
@@ -38,11 +39,31 @@
             };
 
             $http.post(CREATE_CHATROOM_URL, postObject)
-                .success(function(data) {
-                    console.log("_createChatroom, got success response from server. Data: " + data);
+                .success(function(creationResult) {
+                    console.log("_createChatroom, got success response from server. Data: " + creationResult);
 
                     if (resultCallback) {
-                        resultCallback(data.createChatroomResult);
+                        resultCallback(creationResult);
+                    }
+                })
+                .error(reportHttpErrorToConsole);
+        }
+
+        function _getChatroomProperties(chatroomUuid, resultCallback) {
+            if (!chatroomUuid) {
+                console.error("Chatroom UUID is null or not set");
+            }
+
+            var postObject = {
+                "chatroomUuid": chatroomUuid
+            };
+
+            $http.post(GET_CHATROOM_PROPERTIES_URL, postObject)
+                .success(function(data){
+                    console.log("_getChatroomProperties: received data. Chatroom name: " + data.chatroomName);
+
+                    if (resultCallback) {
+                        resultCallback(data);
                     }
                 })
                 .error(reportHttpErrorToConsole);
@@ -54,7 +75,8 @@
 
         return {
             isChatroomExist : _isChatroomExist,
-            createChatroom : _createChatroom
+            createChatroom : _createChatroom,
+            getChatroomProperties: _getChatroomProperties
         };
     }
 }());

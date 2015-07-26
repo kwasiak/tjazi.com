@@ -17,7 +17,7 @@
 
 
         /*
-                    EVENT WIRING
+                    UI EVENTS WIRING
          */
 
         $scope.onContinueButtonClick = continueButtonClick;
@@ -28,7 +28,7 @@
 
 
         /*
-                    END OF EVENTS WIRING
+                    END OF UI EVENTS WIRING
          */
 
         function modalDialogClosed() {
@@ -36,9 +36,23 @@
         }
 
         function continueButtonClick() {
+
+            var administratorUserName = $scope.administratorUserName;
             var chatroomName = $scope.chatroomName;
 
-            $chatroomService.isChatroomExist(chatroomName, isChatroomExistResult);
+            // time to authenticate user
+            $securityService.authenticateUser(administratorUserName, chatroomName,
+                authenticationResult);
+        }
+
+        function authenticationResult(token, isAuthenticated) {
+            console.log("Authentication finished. Token: " + token + ", authenticated?: " + isAuthenticated);
+
+            if (token && token !== "" && isAuthenticated) {
+
+                var chatroomName = $scope.chatroomName;
+                $chatroomService.isChatroomExist(chatroomName, isChatroomExistResult);
+            }
         }
 
         function isChatroomExistResult(result) {
@@ -59,24 +73,10 @@
             console.log("Chatroom creation finished. Result: " + result);
             $scope.chatroomAlreadyExistsError = false;
 
-            var administratorUserName = $scope.administratorUserName;
-            var chatroomName = $scope.chatroomName;
+            if (result && result.createChatroomResult && result.chatroomUuid) {
 
-            // time to authenticate user
-            $securityService.authenticateUser(administratorUserName, chatroomName,
-                authenticationResult);
-        }
-
-        function authenticationResult(token, isAuthenticated) {
-            console.log("Authentication finished. Token: " + token + ", authenticated?: " + isAuthenticated);
-
-            if (token && token !== "" && isAuthenticated) {
-
-                // close the dialog
-                $('#' + DIALOG_ID).modal('hide');
-
-                // move to the chatroom
-                $state.go("chatScreen");
+                // all pieces in place - move to the chatroom
+                moveToChatroom(result.chatroomUuid);
             }
         }
 
@@ -91,6 +91,15 @@
 
             // without this line form won't be updated
             $scope.$apply();
+        }
+
+        function moveToChatroom(chatroomUuid) {
+
+            // close the dialog
+            $('#' + DIALOG_ID).modal('hide');
+
+            // move to the chatroom
+            $state.go("chatScreen", {'chatroomUuid': chatroomUuid});
         }
     }
 }());

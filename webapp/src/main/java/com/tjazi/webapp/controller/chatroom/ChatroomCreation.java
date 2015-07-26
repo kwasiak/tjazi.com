@@ -36,7 +36,7 @@ public class ChatroomCreation {
             log.debug("Got request to create chatroom. Name: '{}'", chatroomName);
 
             if (chatroomService.isChatroomExist(chatroomName)) {
-                return new CreateChatroomResponseMessage(CreateChatroomResult.CHATROOM_EXISTS);
+                return new CreateChatroomResponseMessage(CreateChatroomResult.CHATROOM_EXISTS, null);
             }
 
             log.debug("Adding administrator to the chatroom. Administrator: '{}'", userName);
@@ -45,13 +45,14 @@ public class ChatroomCreation {
 
             // because this is new chatroom, there's no need to check if user already exists
             chatroomDriver.addUserToChatroom(userName);
+
+            return new CreateChatroomResponseMessage(CreateChatroomResult.OK,
+                    chatroomDriver.getChatroomUuid());
         }
         catch (Exception ex) {
 
             log.error("Exception when processing CreateChatroomMessage message. Details:\n" + ex);
-            return new CreateChatroomResponseMessage(CreateChatroomResult.GENERAL_ERROR);
+            return new CreateChatroomResponseMessage(CreateChatroomResult.GENERAL_ERROR, null);
         }
-
-        return new CreateChatroomResponseMessage(CreateChatroomResult.OK);
     }
 }

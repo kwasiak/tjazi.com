@@ -22,7 +22,8 @@
                         .state("chatScreen", {
                             url: "/chatscreen",
                             templateUrl: templatesSecureRoot + "/chatScreen.html",
-                            controller: "ChatScreenController as vm"
+                            controller: "ChatScreenController as vm",
+                            params: { chatroomUuid: null }
                         });
 
                     // make sure all requests will be decorated with the proper header
