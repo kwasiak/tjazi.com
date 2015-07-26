@@ -1,5 +1,6 @@
 package com.tjazi.chatroom.service;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,5 +14,5 @@ public interface SingleChatroomDriver {
 
     UUID getChatroomUuid();
     String getChatroomName();
-    Iterable<String> getChatroomUsers();
+    List<String> getChatroomUsers();
 }

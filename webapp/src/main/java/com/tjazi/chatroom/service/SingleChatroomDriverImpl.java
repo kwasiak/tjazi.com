@@ -2,6 +2,7 @@ package com.tjazi.chatroom.service;
 
 import com.tjazi.chatroom.model.SingleChatroomData;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -56,7 +57,7 @@ public class SingleChatroomDriverImpl implements SingleChatroomDriver {
     }
 
     @Override
-    public Iterable<String> getChatroomUsers() {
+    public List<String> getChatroomUsers() {
         return chatroomData.getChatroomUsers();
     }
 }
