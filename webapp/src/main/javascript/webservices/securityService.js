@@ -12,15 +12,16 @@
     // password won't be validated anyway
     // it's just a matter of adding user to the chatroom
     var FAKE_PASSWORD = "password";
-    var AUTHENTICATE_USER_URL = "/security/authenticateuser";
+    var SECURITY_ROOT_URL = "/security";
+    var AUTHENTICATE_USER_URL = SECURITY_ROOT_URL + "/authenticateuser";
+    var IS_USER_AUTHENTICATED_URL = SECURITY_ROOT_URL + "/isuserauthenticated";
 
     function SecurityService($http, $rootScope) {
 
-        var _authenticateUser = function (userName, chatroomName, resultCallback) {
+        var _authenticateUser = function (userName, resultCallback) {
 
             var headers = {
-                authorization: "Basic " + btoa(userName + ":" + FAKE_PASSWORD),
-                "Chatroom": chatroomName
+                authorization: "Basic " + btoa(userName + ":" + FAKE_PASSWORD)
             };
 
             $rootScope.token = null;
@@ -46,8 +47,26 @@
                 });
         };
 
+        var _isUserAuthenticated = function(resultCallback) {
+            $http.get(IS_USER_AUTHENTICATED_URL)
+                .success(function(result){
+                    if (resultCallback) {
+                        resultCallback(result);
+                    }
+                })
+                .error(function() {
+                    console.error("Problem with getting authentication status for the user.");
+
+                    if (resultCallback) {
+                        resultCallback(null);
+                    }
+                });
+
+        };
+
         return {
-            authenticateUser : _authenticateUser
+            authenticateUser : _authenticateUser,
+            isUserAuthenticated : _isUserAuthenticated
         };
     }
 }());

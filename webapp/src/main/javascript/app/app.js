@@ -1,3 +1,11 @@
+// keep name of the states in the global variable
+window.StateNames =
+    {
+        home: "home",
+        login: "loginScreen",
+        chat: "chatScreen"
+    };
+
 (function () {
     "use strict";
 
@@ -14,21 +22,21 @@
                     $urlRouterProvider.otherwise("/");
 
                     $stateProvider
-                        .state("home", {
+                        .state(StateNames.home, {
                             url: "/",
                             templateUrl: templatesRoot + "/home.html",
                             controller: "HomeScreenController as vm"
                         })
-                        .state("chatScreen", {
+                        .state(StateNames.chat, {
                             url: "/chatscreen",
                             templateUrl: templatesSecureRoot + "/chatScreen.html",
                             controller: "ChatScreenController as vm",
                             params: { chatroomUuid: null }
                         })
-                        .state("loginScreen", {
+                        .state(StateNames.login, {
                             url: "/login",
                             templateUrl: templatesRoot + "/loginScreen.html",
-                            controller: "LoginController as vm",
+                            controller: "LoginScreenController as vm",
                             params:
                             {
                                 // state, which has to be called after log-in is completed
