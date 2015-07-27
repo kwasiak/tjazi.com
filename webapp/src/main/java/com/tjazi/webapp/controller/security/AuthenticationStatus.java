@@ -49,7 +49,7 @@ public class AuthenticationStatus {
         String authenticationToken = sessionService.getAuthenticationToken();
 
         if (authenticationToken == null || authenticationToken.isEmpty()) {
-            log.error("Authentication for user '{}' doesn't have corresponding authentication token.");
+            log.error("Authentication for user '{}' doesn't have corresponding authentication token.", currentUser);
             return new IsUserAuthenticatedResponseMessage(false, null);
         }
 
