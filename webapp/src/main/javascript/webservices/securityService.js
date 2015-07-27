@@ -47,6 +47,11 @@
                 });
         };
 
+        /**
+         * Check if current user (as per session) is already authenticated
+         * @param resultCallback - Function to be called when result is back
+         * @private
+         */
         var _isUserAuthenticated = function(resultCallback) {
             $http.get(IS_USER_AUTHENTICATED_URL)
                 .success(function(result){

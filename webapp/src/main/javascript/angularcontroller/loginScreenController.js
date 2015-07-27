@@ -20,11 +20,17 @@
         vm.loginForm.userName = "";
         vm.loginForm.password = "";
 
-        /*TODO: remove this line */
-        redirectToCallbackState();
-
         vm.onLoginClick = onLoginClick;
         vm.onCancelClick = onCancelClick;
+
+        // check if current user is logged-in (as per session data)
+        // if he / she is, then move back to the default state
+        isCurrentUserLoggedIn(function(result) {
+           if (result) {
+               $state.go(StateNames.home);
+           }
+        });
+
 
         function onLoginClick() {
             isCurrentUserLoggedIn(function(result) {
@@ -62,21 +68,17 @@
 
         function redirectToCallbackState() {
 
-            /* TODO: Remove this line */
-            if (false) {
+            if ($stateParams && $stateParams.callbackStateName) {
 
-                if ($stateParams && $stateParams.callbackStateName) {
+                var callbackState = $stateParams.callbackStateName;
 
-                    var callbackState = $stateParams.callbackStateName;
+                console.info("Moving from Login controller to " + callbackState);
 
-                    console.info("Moving from Login controller to " + callbackState);
+                $state.go(callbackState, $stateParams.callbackStateParams);
+            } else {
+                console.warn("No callback set for Login controller. Moving to " + DEFAULT_CALLBACK_STATE);
 
-                    $state.go(callbackState, $stateParams.callbackStateParams);
-                } else {
-                    console.warn("No callback set for Login controller. Moving to " + DEFAULT_CALLBACK_STATE);
-
-                    $state.go(StateNames.home);
-                }
+                $state.go(StateNames.home);
             }
         }
     }

@@ -18,7 +18,7 @@ public class IsUserAuthenticatedResponseMessage {
         this.authenticationToken = authenticationToken;
     }
 
-    public boolean isAuthenticated() {
+    public boolean getIsAuthenticated() {
         return isAuthenticated;
     }
 
