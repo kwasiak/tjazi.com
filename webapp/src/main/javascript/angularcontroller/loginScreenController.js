@@ -5,7 +5,7 @@
 (function () {
     "use strict";
 
-    angular.module("tjaziWebApp")
+    angular.module(TjaziApplicationName)
         .controller("LoginScreenController",
                     ["$state", "$stateParams", "$securityService", loginController]);
 

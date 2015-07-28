@@ -26,12 +26,14 @@
 
             $rootScope.token = null;
             $rootScope.authenticated = false;
+            $rootScope.userName = null;
 
             $http.get(AUTHENTICATE_USER_URL, {headers: headers})
                 .success(function(result) {
                     if (result.authenticationToken) {
                         $rootScope.token = result.authenticationToken;
                         $rootScope.authenticated = true;
+                        $rootScope.userName = userName;
                     }
 
                     if (resultCallback) {
@@ -55,6 +57,10 @@
         var _isUserAuthenticated = function(resultCallback) {
             $http.get(IS_USER_AUTHENTICATED_URL)
                 .success(function(result){
+
+                    $rootScope.token = result.isAuthenticated;
+                    $rootScope.authenticated = result.authenticationToken;
+
                     if (resultCallback) {
                         resultCallback(result);
                     }

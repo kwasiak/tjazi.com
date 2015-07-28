@@ -4,7 +4,7 @@
 (function () {
     "use strict";
 
-    angular.module("tjaziWebApp")
+    angular.module(TjaziApplicationName)
         .controller("ChatScreenController",
         ["$scope", "$stateParams", "$state", "$chatroomService", chatScreenController]);
 

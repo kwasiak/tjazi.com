@@ -6,11 +6,13 @@ window.StateNames =
         chat: "chatScreen"
     };
 
+window.TjaziApplicationName = "tjaziWebApp";
+
 (function () {
     "use strict";
 
     var app = angular.module(
-            "tjaziWebApp",
+            TjaziApplicationName,
             ["webServices", "ui.router"]);
 
     var templatesRoot = "templates";
