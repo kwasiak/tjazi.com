@@ -13,22 +13,32 @@
 </head>
 <body ng-app="tjaziWebApp">
 
-    <div id="topBanner" style="width: 100%;">
-        <div>
-            <header style="background-color: darkgray; height: 50px; line-height: 50px; white-space: nowrap; font-size: large;">
-                <a href="/" style="color: white; text-decoration: none; margin-left: 20px;">tjazi.com</a>
-            </header>
+    <nav class="navbar navbar-default" role="navigation" style="height: 50px; margin: 0px;">
+        <div class="navbar-brand" th:href="/">
+            <a ui-sref="home">tjazi.com</a>
         </div>
 
-        <nav id="sideNavParent"
-             style="background: black; position: absolute;
-             left: 0em; width: 200px; height: 100%; color: whitesmoke; margin-top: -50px; z-index: -1;
-             padding-top: 50px;">
-            <ul>
-                <li>Krzys</li>
-                <li>Wasiak</li>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-right navbar-nav">
+                <li>
+                    <div class="btn btn-success navbar-btn"
+                         style="margin-right: 10px; background-color: darkorange; border-color: darkorange">Log-in</div>
+                </li>
+                <li>
+                    <p class="navbar-text">Signed in as: <strong>{{vm.currentUserName = '(Unknown)'}}</strong></p>
+                </li>
             </ul>
-        </nav>
+        </div>
+    </nav>
+
+    <div id="sideNavParent"
+         style="background: black; position: absolute;
+             left: 0em; width: 200px; height: 100%; color: whitesmoke; margin-top: -50px; z-index: -1;
+             padding-top: 70px;">
+        <ul>
+            <li>Krzys</li>
+            <li>Wasiak</li>
+        </ul>
     </div>
 
     <div style="margin-left: 214px; margin-right: 14px;">
