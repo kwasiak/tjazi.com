@@ -41,7 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .httpBasic().and()
-                .authorizeRequests().antMatchers("/security/**").authenticated();
+                .authorizeRequests().antMatchers("/security/**").authenticated()
 
+                // this by default set's '/logout' address, which is just enough to call
+                // to logout from this session
+                .and().logout();
     }
 }

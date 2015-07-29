@@ -7,10 +7,10 @@
 
     angular.module(TjaziApplicationName)
         .controller("IndexController",
-                    ["$scope", "$rootScope",
+                    ["$scope", "$rootScope", "$securityService", "$state",
                     indexController]);
 
-    function indexController($scope, $rootScope) {
+    function indexController($scope, $rootScope, $securityService, $state) {
 
         // set authentication details into the $rootscope
         $rootScope.token = window.auth.token;
@@ -18,10 +18,22 @@
         $rootScope.authenticated = (window.auth.user && window.auth.token);
 
         $scope.isUserAuthenticated = isUserAuthenticated;
+        $scope.logout = logoutUser;
         $scope.currentUserName = $rootScope.userName;
 
         function isUserAuthenticated() {
             return $rootScope && $rootScope.authenticated;
+        }
+
+        function logoutUser() {
+            $securityService.logoutUser(function(isLogoutSuccessful) {
+                if (isLogoutSuccessful) {
+                    $state.go(StateNames.home);
+                }
+                else {
+                    $state.go(StateNames.login);
+                }
+            });
         }
 
         console.log($scope);

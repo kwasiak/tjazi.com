@@ -36,6 +36,9 @@
                 <li ng-show="isUserAuthenticated()">
                     <p class="navbar-text">Signed in as: <strong>{{currentUserName}}</strong></p>
                 </li>
+                <li ng-show="isUserAuthenticated()">
+                    <a class="navbar-link" ng-click="logout()"><strong>Log-out</strong></a>
+                </li>
             </ul>
         </div>
     </nav>

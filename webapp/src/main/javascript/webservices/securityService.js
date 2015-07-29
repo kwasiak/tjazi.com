@@ -14,7 +14,9 @@
     var FAKE_PASSWORD = "password";
     var SECURITY_ROOT_URL = "/security";
     var AUTHENTICATE_USER_URL = SECURITY_ROOT_URL + "/authenticateuser";
+    var LOGOUT_USER_URL = "/logout";
     var IS_USER_AUTHENTICATED_URL = SECURITY_ROOT_URL + "/isuserauthenticated";
+
 
     function SecurityService($http, $rootScope) {
 
@@ -49,6 +51,30 @@
                 });
         };
 
+        var _logoutUser = function(resultCallback) {
+
+            $rootScope.token = null;
+            $rootScope.authenticated = false;
+            $rootScope.userName = null;
+
+            $http.post(LOGOUT_USER_URL, {})
+                .success(function() {
+
+                    console.log("LogOut successful.");
+
+                    if (resultCallback) {
+                        resultCallback(true);
+                    }
+                })
+                .error(function(data) {
+                    console.log("LogOut failed. Error data:\n" + data);
+
+                    if (resultCallback) {
+                        resultCallback(false);
+                    }
+                });
+        };
+
         /**
          * Check if current user (as per session) is already authenticated
          * @param resultCallback - Function to be called when result is back
@@ -77,6 +103,7 @@
 
         return {
             authenticateUser : _authenticateUser,
+            logoutUser: _logoutUser,
             isUserAuthenticated : _isUserAuthenticated
         };
     }
