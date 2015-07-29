@@ -21,6 +21,7 @@ window.TjaziApplicationName = "tjaziWebApp";
     app.config(["$stateProvider", "$urlRouterProvider", "$httpProvider",
 
                 function($stateProvider, $urlRouterProvider, $httpProvider) {
+                    // main routing configuration
                     $urlRouterProvider.otherwise("/");
 
                     $stateProvider

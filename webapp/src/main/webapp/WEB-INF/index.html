@@ -8,6 +8,15 @@
     <link th:href="@{/css/libs.css}" href="css/libs.css" rel="stylesheet"/>
     <link th:href="@{/css/app.css}" href="css/app.css" rel="stylesheet"/>
 
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.auth = {
+            "user": /*[[${user}]]*/ null,
+            "token": /*[[${token}]]*/ null
+        };
+        /*]]>*/
+    </script>
+
     <script th:src="@{/js/libs.min.js}" src="js/libs.min.js"></script>
     <script th:src="@{/js/app.min.js}" src="js/app.min.js"></script>
 </head>
@@ -25,7 +34,7 @@
                          style="margin-right: 10px; background-color: darkorange; border-color: darkorange">Log-in</div>
                 </li>
                 <li ng-show="isUserAuthenticated()">
-                    <p class="navbar-text">Signed in as: <strong>{{vm.currentUserName}}</strong></p>
+                    <p class="navbar-text">Signed in as: <strong>{{currentUserName}}</strong></p>
                 </li>
             </ul>
         </div>
