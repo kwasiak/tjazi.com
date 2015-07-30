@@ -32,6 +32,8 @@
                 <li ng-show="!isUserAuthenticated()">
                     <div class="btn btn-success navbar-btn" ui-sref="loginScreen"
                          style="margin-right: 10px; background-color: darkorange; border-color: darkorange">Log-in</div>
+                    <div class="btn btn-success navbar-btn" ui-sref="newUserScreen"
+                         style="margin-right: 10px; background-color: darkorange; border-color: darkorange">Sign-up</div>
                 </li>
                 <li ng-show="isUserAuthenticated()">
                     <p class="navbar-text">Signed in as: <strong>{{currentUserName}}</strong></p>

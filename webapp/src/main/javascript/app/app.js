@@ -3,7 +3,8 @@ window.StateNames =
     {
         home: "home",
         login: "loginScreen",
-        chat: "chatScreen"
+        chat: "chatScreen",
+        newUser: "newUserScreen"
     };
 
 window.TjaziApplicationName = "tjaziWebApp";
@@ -48,6 +49,11 @@ window.TjaziApplicationName = "tjaziWebApp";
                                 // parameters, which have to be sent to the callbackStateName
                                 "callbackStateParams": null
                             }
+                        })
+                        .state(StateNames.newUser, {
+                            url: "/newuser",
+                            templateUrl: templatesRoot + "/newUserScreen.html",
+                            controller: "NewUserController as vm"
                         });
 
                     // make sure all requests will be decorated with the proper header
