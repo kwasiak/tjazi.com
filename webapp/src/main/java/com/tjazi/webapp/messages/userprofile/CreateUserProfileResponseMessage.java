@@ -11,6 +11,10 @@ public class CreateUserProfileResponseMessage {
         return result;
     }
 
+    public CreateUserProfileResponseMessage(CreateUserProfileResult result) {
+        this.result = result;
+    }
+
     public void setResult(CreateUserProfileResult result) {
         this.result = result;
     }

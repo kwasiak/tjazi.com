@@ -9,5 +9,7 @@ public enum CreateUserProfileResult {
 
     DUPLICATED_USER_NAME,
 
+    USER_NAME_NULL_OR_EMPTY,
+
     GENERAL_ERROR
 }
