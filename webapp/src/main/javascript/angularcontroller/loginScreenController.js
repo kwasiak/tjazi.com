@@ -16,9 +16,12 @@
         /* jshint validthis: true */
         var vm = this;
 
-        vm.loginForm = {};
-        vm.loginForm.userName = "";
-        vm.loginForm.password = "";
+        vm.loginForm = {
+            "userName": "",
+            "password": ""
+        };
+
+        vm.authenticationError = false;
 
         vm.onLoginClick = onLoginClick;
         vm.onCancelClick = onCancelClick;
@@ -38,7 +41,9 @@
                 if (result) {
                     redirectToCallbackState();
                 } else {
-                    $securityService.authenticateUser(vm.loginForm.userName, onAuthenticationComplete);
+                    $securityService.authenticateUser(
+                        vm.loginForm.userName, vm.loginForm.password,
+                        onAuthenticationComplete);
                 }
             });
         }
@@ -48,6 +53,8 @@
 
                 /* TODO: authentication failed error dialog */
                 console.error("Authentication has failed");
+
+                vm.authenticationError = true;
             } else {
                 console.log("Authentication succeed. Token: " + token);
 

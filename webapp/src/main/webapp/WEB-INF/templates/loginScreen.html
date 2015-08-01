@@ -1,11 +1,15 @@
+<div class="alert alert-danger" ng-show="vm.authenticationError">
+    <span class="glyphicon glyphicon-alert"></span>
+    Invalid user name and/or password!
+</div>
 <form>
     <div class="form-group">
-        <label for="inputUserName">User name <span style="color: red">(please user some dummy user name!!!)</span></label>
+        <label for="inputUserName">User name:</label>
         <input class="form-control" id="inputUserName" placeholder="User name"
                 ng-model="vm.loginForm.userName" required="required"/>
     </div>
     <div class="form-group">
-        <label for="inputPassword">Password <span style="color: red">(please use some dummy password!!!)</span></label>
+        <label for="inputPassword">Password:</label>
         <input type="password" class="form-control" id="inputPassword" placeholder="Password"
                 ng-model="vm.loginForm.password" required="required"/>
     </div>

@@ -17,6 +17,9 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CustomAuthenticationProvider customAuthenticationProvider;
+
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
@@ -24,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         log.debug("Setting global configuration for SecurityConfig");
 
-        auth.authenticationProvider(new CustomAuthenticationProvider());
+        auth.authenticationProvider(customAuthenticationProvider);
     }
 
     @Override

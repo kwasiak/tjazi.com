@@ -11,7 +11,6 @@
 
     // password won't be validated anyway
     // it's just a matter of adding user to the chatroom
-    var FAKE_PASSWORD = "password";
     var SECURITY_ROOT_URL = "/security";
     var AUTHENTICATE_USER_URL = SECURITY_ROOT_URL + "/authenticateuser";
     var LOGOUT_USER_URL = "/logout";
@@ -20,10 +19,10 @@
 
     function SecurityService($http, $rootScope) {
 
-        var _authenticateUser = function (userName, resultCallback) {
+        var _authenticateUser = function (userName, password, resultCallback) {
 
             var headers = {
-                authorization: "Basic " + btoa(userName + ":" + FAKE_PASSWORD)
+                authorization: "Basic " + btoa(userName + ":" + password)
             };
 
             $rootScope.token = null;
