@@ -22,6 +22,8 @@
             'password': null
         };
 
+        vm.duplicatedUserName = "";
+
         vm.onAddClick = onAddButtonClick;
         vm.onCancelClick = onCancelButtonClick;
 
@@ -32,10 +34,27 @@
 
             if (userName && password)
             {
-                $userProfileService.createNewUserProfile(userName, password,
-                function createNewProfileResult(result) {
-                    console.log(result);
-                });
+                $userProfileService.createNewUserProfile(
+                    userName, password, profileRegistrationResult);
+            }
+        }
+
+        function profileRegistrationResult(result) {
+
+            switch (result.result) {
+                case "OK":
+                    $state.go(StateNames.home);
+                    break;
+
+                case "DUPLICATED_USER_NAME":
+                    // setting vm.duplicatedUserName will show the Duplicated User error
+                    vm.duplicatedUserName = vm.newUserForm.userName;
+                    break;
+
+                default:
+
+                    /* TODO: handle exception cases */
+                    break;
             }
         }
 
