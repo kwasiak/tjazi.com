@@ -41,9 +41,15 @@
                 if (result) {
                     redirectToCallbackState();
                 } else {
-                    $securityService.authenticateUser(
-                        vm.loginForm.userName, vm.loginForm.password,
-                        onAuthenticationComplete);
+
+                    var userName = vm.loginForm.userName;
+                    var password = vm.loginForm.password;
+
+                    if (userName && password) {
+                        $securityService.authenticateUser(
+                            userName, password,
+                            onAuthenticationComplete);
+                    }
                 }
             });
         }
