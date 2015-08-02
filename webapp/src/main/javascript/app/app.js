@@ -3,6 +3,7 @@ window.StateNames =
     {
         home: "home",
         login: "loginScreen",
+        newChat: "newChatScreen",
         chat: "chatScreen",
         newUser: "newUserScreen"
     };
@@ -30,6 +31,11 @@ window.TjaziApplicationName = "tjaziWebApp";
                             url: "/",
                             templateUrl: templatesRoot + "/home.html",
                             controller: "HomeScreenController as vm"
+                        })
+                        .state(StateNames.newChat, {
+                            url: "/newchat",
+                            templateUrl: templatesSecureRoot + "/newChatScreen.html",
+                            controller: "NewChatScreenController as vm"
                         })
                         .state(StateNames.chat, {
                             url: "/chatscreen",

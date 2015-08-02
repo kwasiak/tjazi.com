@@ -7,9 +7,10 @@
 
     angular.module(TjaziApplicationName)
         .controller("LoginScreenController",
-                    ["$state", "$stateParams", "$securityService", loginController]);
+                    ["$state", "$stateParams", "$securityService", "$rootScope",
+                        loginController]);
 
-    function loginController($state, $stateParams, $securityService) {
+    function loginController($state, $stateParams, $securityService, $rootScope) {
 
         var DEFAULT_CALLBACK_STATE = StateNames.home;
 

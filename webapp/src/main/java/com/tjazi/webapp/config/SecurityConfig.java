@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/**/*.js", "/**/*.css", "/", "/templates/**", "/templatessecure/**", "/chatroom/**", "/security/isuserauthenticated/**")
+                .antMatchers("/**/*.js", "/**/*.css", "/", "/templates/**", "/chatroom/**", "/security/isuserauthenticated/**")
                 .permitAll()
                 .and()
 
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .httpBasic().and()
-                .authorizeRequests().antMatchers("/security/**").authenticated()
+                .authorizeRequests().antMatchers("/security/**", "/templatessecure/**").authenticated()
 
                 // this by default set's '/logout' address, which is just enough to call
                 // to logout from this session
