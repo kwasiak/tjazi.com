@@ -30,5 +30,14 @@
   "lessToCssFiles": {
     "src/main/webapp/WEB-INF/css/libs.css" : "src/main/less/libs.less",
     "src/main/webapp/WEB-INF/css/app.css" : ["src/main/less/**/app.less", "src/main/less/**/*View.less"]
-  }
+  },
+
+  "miscFilesToCopy": [
+    {
+      "expand": true,
+      "cwd": "bower_components/bootstrap/dist/fonts/",
+      "src":  "*",
+      "dest": "src/main/webapp/WEB-INF/fonts/"
+    }
+  ]
 }

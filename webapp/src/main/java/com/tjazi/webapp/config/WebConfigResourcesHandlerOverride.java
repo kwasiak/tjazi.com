@@ -27,8 +27,8 @@ public class WebConfigResourcesHandlerOverride extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/templatessecure/**").addResourceLocations("/WEB-INF/templatessecure/");
 
         // configure version-related naming convention for JS and CSS files
-        registry.addResourceHandler("/css/**", "/js/**")
-                .addResourceLocations("/WEB-INF/css/", "/WEB-INF/js/")
+        registry.addResourceHandler("/css/**", "/js/**", "/fonts/**")
+                .addResourceLocations("/WEB-INF/css/", "/WEB-INF/js/", "/WEB-INF/fonts/")
 
                 /* Update for production - set cache and resourceChain to 'true' */
                 .setCachePeriod(0)

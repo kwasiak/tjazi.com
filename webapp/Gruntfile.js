@@ -142,6 +142,12 @@ module.exports = function (grunt) {
             }
         },
 
+        copy: {
+            main: {
+                files: projectStructure.miscFilesToCopy
+            }
+        },
+
         watch: {
             javascript: {
                 files: [
@@ -169,11 +175,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-htmlhint');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'htmlhint', 'less:development', 'concat:development', 'watch']);
+    grunt.registerTask('default',
+        ['jshint', 'htmlhint', 'less:development', 'concat:development', 'copy', 'watch']);
 
     grunt.registerTask('development', ['default']);
-    grunt.registerTask('production', ['jshint', 'htmlhint', 'less:production', 'concat:production', 'uglify']);
+    grunt.registerTask('production',
+        ['jshint', 'htmlhint', 'less:production', 'concat:production', 'uglify', 'copy']);
 };
 
