@@ -57,12 +57,16 @@
         function onAuthenticationComplete(token, isAuthenticated) {
             if (!isAuthenticated) {
 
-                /* TODO: authentication failed error dialog */
                 console.error("Authentication has failed");
 
+                // trigger alert showing log-in error
                 vm.authenticationError = true;
             } else {
                 console.log("Authentication succeed. Token: " + token);
+
+                $rootScope.token = token;
+                $rootScope.userName = vm.loginForm.userName;
+                $rootScope.authenticated = true;
 
                 redirectToCallbackState();
             }

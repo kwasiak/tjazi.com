@@ -21,6 +21,12 @@
         $scope.logout = logoutUser;
         $scope.currentUserName = $rootScope.userName;
 
+        $rootScope.$watch("userName", onUserNameChange);
+
+        function onUserNameChange() {
+            $scope.currentUserName = $rootScope.userName;
+        }
+
         function isUserAuthenticated() {
             return $rootScope && $rootScope.authenticated;
         }
