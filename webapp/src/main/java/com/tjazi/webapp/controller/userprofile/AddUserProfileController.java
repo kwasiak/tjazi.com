@@ -1,5 +1,7 @@
 package com.tjazi.webapp.controller.userprofile;
 
+import com.tjazi.security.service.SecurityUserProfileService;
+import com.tjazi.userprofile.model.SingleUserProfileData;
 import com.tjazi.userprofile.service.UserProfileService;
 import com.tjazi.webapp.messages.userprofile.CreateUserProfileRequestMessage;
 import com.tjazi.webapp.messages.userprofile.CreateUserProfileResponseMessage;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * Created by kwasiak on 30/07/15.
  */
@@ -22,6 +26,9 @@ public class AddUserProfileController {
 
     @Autowired
     private UserProfileService userProfileService;
+
+    @Autowired
+    private SecurityUserProfileService securityUserProfileService;
 
     private static final Logger log = LoggerFactory.getLogger(AddUserProfileController.class);
 
@@ -47,9 +54,16 @@ public class AddUserProfileController {
             return new CreateUserProfileResponseMessage(CreateUserProfileResult.DUPLICATED_USER_NAME);
         }
 
-        userProfileService.registerNewProfile(newUserName);
+        SingleUserProfileData registeredProfile = userProfileService.registerNewProfile(newUserName);
 
-        log.info("Profile registration succeed. User name: " + newUserName);
+        UUID profileUuid = registeredProfile.getProfileUuid();
+
+        log.info("Profile registration succeed. User name: {}, user name per profile: {}, user profile UUID: {}",
+                newUserName, registeredProfile.getUserName(), profileUuid);
+
+        securityUserProfileService.registerNewSecurityUserProfile(profileUuid, requestMessage.getPassword());
+
+        log.info("Security profile set for user profile UUID: {}", profileUuid);
 
         return new CreateUserProfileResponseMessage(CreateUserProfileResult.OK);
     }
