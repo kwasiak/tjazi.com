@@ -30,12 +30,11 @@
                 .error(reportHttpErrorToConsole);
         }
 
-        function _createChatroom(chatroomName, administratorUserName, resultCallback) {
+        function _createChatroom(chatroomName, resultCallback) {
 
             var postObject =
             {
-                "chatroomName" : chatroomName,
-                "chatroomAdministratorUserName": administratorUserName
+                "chatroomName" : chatroomName
             };
 
             $http.post(CREATE_CHATROOM_URL, postObject)

@@ -11,11 +11,19 @@
 
     function homeScreenController($state) {
 
+        console.log($state);
+
         /* jshint validthis: true */
         var vm = this;
 
-        vm.onStartNewChatroomClick = function() {
-            $state.go("chatScreen");
-        };
+        vm.onStartNewChatroomClick = startNewChatroomClick;
+
+        function startNewChatroomClick() {
+
+            // move to log-in screen if user is not logged-in
+
+            // otherwise move directly to the chat creation screen
+
+        }
     }
 }());

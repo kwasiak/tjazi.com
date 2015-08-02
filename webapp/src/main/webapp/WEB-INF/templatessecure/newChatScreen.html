@@ -1,1 +1,15 @@
-<h1>New chat screen</h1>
+<div class="alert alert-danger" ng-show="vm.duplicatedChatName">
+    Chat with name <strong>{{vm.duplicatedUserName}}</strong> is already registered.
+</div>
+<h3>New chat registration</h3>
+<div style="margin: 10px; border: thin lightblue solid; padding: 10px;">
+    <form>
+        <div class="form-group">
+            <label for="inputUserName">Chat name:</label>
+            <input class="form-control" id="inputUserName" placeholder="User name"
+                   ng-model="vm.newChatForm.chatName" required="required"/>
+        </div>
+        <button type="add" class="btn btn-success" ng-click="vm.onAddClick()">Add</button>
+        <button type="cancel" class="btn btn-link" ng-click="vm.onCancelClick()">Cancel</button>
+    </form>
+</div>
