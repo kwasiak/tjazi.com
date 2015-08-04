@@ -6,10 +6,10 @@
 
     angular.module(TjaziApplicationName)
         .controller("HomeScreenController",
-                    ["$state",
+                    ["$state", "$securityService",
                      homeScreenController]);
 
-    function homeScreenController($state) {
+    function homeScreenController($state, $securityService) {
 
         console.log($state);
 
@@ -20,10 +20,17 @@
 
         function startNewChatroomClick() {
 
-            // move to log-in screen if user is not logged-in
-
-            // otherwise move directly to the chat creation screen
-
+            $securityService.isUserAuthenticatedLocalCheck(function(result) {
+                if (result === true) {
+                    // move directly to the chat creation screen
+                    $state.go(StateNames.newChat);
+                } else {
+                    // move to log-in screen if user is not logged-in
+                    $state.go(StateNames.login, {
+                        "callbackStateName": StateNames.newChat
+                    });
+                }
+            });
         }
     }
 }());

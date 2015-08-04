@@ -97,13 +97,23 @@
                         resultCallback(null);
                     }
                 });
+        };
 
+        /**
+         * Check of user is authenticated by checking local variables
+         * instead of calling server (like: _isUserAuthenticated)
+         */
+        var _isUserAuthenticatedLocalCheck = function(resultCallback) {
+            if (resultCallback) {
+                resultCallback(!!($rootScope.token && $rootScope.authenticated && $rootScope.userName));
+            }
         };
 
         return {
             authenticateUser : _authenticateUser,
             logoutUser: _logoutUser,
-            isUserAuthenticated : _isUserAuthenticated
+            isUserAuthenticated : _isUserAuthenticated,
+            isUserAuthenticatedLocalCheck: _isUserAuthenticatedLocalCheck
         };
     }
 }());
