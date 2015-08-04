@@ -97,7 +97,7 @@
         }
 
         function resizeChatWindow() {
-            var topBannerHeight = $('#topBanner').outerHeight(true);
+            var topBannerHeight = $('#topNavBar').outerHeight(true);
             var charHeaderHeight = $('#chatHeader').outerHeight(true);
             var newMessageHeight = $('#chatNewMessage').outerHeight(true);
             var marginAndAlignment = 20 * 2 + 10;
