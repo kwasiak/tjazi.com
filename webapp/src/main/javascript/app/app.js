@@ -38,7 +38,7 @@ window.TjaziApplicationName = "tjaziWebApp";
                             controller: "NewChatScreenController as vm"
                         })
                         .state(StateNames.chat, {
-                            url: "/chatscreen",
+                            url: "/chatscreen/:chatroomUuid",
                             templateUrl: templatesSecureRoot + "/chatScreen.html",
                             controller: "ChatScreenController as vm",
                             params: { chatroomUuid: null }
