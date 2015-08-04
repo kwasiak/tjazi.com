@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d33b6e7a-a6b0-4bc0-8ef1-10cacf08eabc" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/controller/chatroom/ChatroomCreation.java" afterPath="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/controller/chatroom/ChatroomCreationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomMessage.java" afterPath="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResult.java" afterPath="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templatessecure/newChatScreen.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templatessecure/newChatScreen.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/javascript/angularcontroller/newChatScreenController.js" afterPath="$PROJECT_DIR$/src/main/javascript/angularcontroller/newChatScreenController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,21 +31,21 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="CreateChatroomResult.java" pinned="false" current-in-tab="true">
+            <file leaf-file-name="CreateChatroomResult.java" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResult.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.3472081">
+                  <state vertical-scroll-proportion="0.0">
                     <caret line="19" column="19" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="19" />
                     <folding />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="CreateChatroomResponseMessage.java" pinned="false" current-in-tab="false">
+            <file leaf-file-name="CreateChatroomResponseMessage.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResponseMessage.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.0">
-                    <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                  <state vertical-scroll-proportion="0.18274112">
+                    <caret line="10" column="29" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="29" />
                     <folding />
                   </state>
                 </provider>
@@ -82,6 +77,16 @@
                 </provider>
               </entry>
             </file>
+            <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/main/javascript/app/app.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.0">
+                    <caret line="43" column="50" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="50" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
           </leaf>
         </state>
       </content>
@@ -96,8 +101,8 @@
       <file leaf-file-name="newChatScreenController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/javascript/angularcontroller/newChatScreenController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06603774">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.38658148">
+              <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -186,8 +191,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/controller/chatroom/ChatroomCreation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/controller/chatroom/ChatroomCreationController.java" />
-        <option value="$PROJECT_DIR$/src/main/javascript/angularcontroller/newChatScreenController.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/templatessecure/newChatScreen.html" />
+        <option value="$PROJECT_DIR$/src/main/javascript/angularcontroller/newChatScreenController.js" />
       </list>
     </option>
   </component>
@@ -1903,12 +1908,12 @@
       <workItem from="1438526284552" duration="1719000" />
       <workItem from="1438542963259" duration="6000000" />
       <workItem from="1438669758187" duration="932000" />
-      <workItem from="1438680401199" duration="2842000" />
+      <workItem from="1438680401199" duration="3336000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262787000" />
+    <option name="totallyTimeSpent" value="263281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="0" width="1922" height="1081" extended-state="6" />
@@ -1933,7 +1938,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3226837" sideWeight="0.49574015" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3226837" sideWeight="0.49574015" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2235,6 +2240,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="76" column="26" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2286,14 +2292,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/javascript/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54858935">
-          <caret line="58" column="50" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/javascript/angularcontroller/chatScreenController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39498433">
@@ -2310,10 +2308,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResponseMessage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="e#295#296#0" expanded="true" />
+            <element signature="e#343#344#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templatessecure/newChatScreen.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6666665">
+          <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/javascript/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="50" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="50" />
           <folding />
         </state>
       </provider>
@@ -2329,37 +2354,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomMessage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResponseMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding>
-            <element signature="e#295#296#0" expanded="true" />
-            <element signature="e#343#344#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/chatroomcreation/CreateChatroomResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3472081">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templatessecure/newChatScreen.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.6666665">
-          <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.18274112">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/javascript/angularcontroller/newChatScreenController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06603774">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.38658148">
+          <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
           <folding />
         </state>
       </provider>

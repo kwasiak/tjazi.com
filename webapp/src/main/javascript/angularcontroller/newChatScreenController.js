@@ -38,7 +38,11 @@
             switch (result.createChatroomResult) {
                 case "OK":
                     resetErrors();
-                    /* TODO: move to newly created chatroom */
+
+                    $state.go(StateNames.chat, {
+                        chatroomUuid: result.chatroomUuid
+                    });
+
                     break;
 
                 case "CHATROOM_EXISTS":
