@@ -20,6 +20,7 @@
         };
 
         vm.duplicatedChatName = "";
+        vm.generalError = false;
 
         vm.onAddClick = onAddButtonClick;
         vm.onCancelClick = onCancelButtonClick;
@@ -36,6 +37,7 @@
 
             switch (result.result) {
                 case "OK":
+                    resetErrors();
                     /* TODO: move to newly created chatroom */
                     break;
 
@@ -44,8 +46,15 @@
                     break;
 
                 default:
-                    /* TODO: handle exception cases */
+                    // some general error
+                    vm.generalError = true;
+                    break;
             }
+        }
+
+        function resetErrors() {
+            vm.duplicatedChatName = "";
+            vm.generalError = false;
         }
 
         function onCancelButtonClick() {

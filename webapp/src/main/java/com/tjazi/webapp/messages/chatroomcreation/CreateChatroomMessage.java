@@ -1,4 +1,4 @@
-package com.tjazi.webapp.messages;
+package com.tjazi.webapp.messages.chatroomcreation;
 
 /**
  * Created by kwasiak on 21/07/15.

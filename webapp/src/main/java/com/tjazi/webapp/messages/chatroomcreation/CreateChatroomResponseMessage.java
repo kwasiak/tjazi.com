@@ -1,4 +1,4 @@
-package com.tjazi.webapp.messages;
+package com.tjazi.webapp.messages.chatroomcreation;
 
 import java.util.UUID;
 

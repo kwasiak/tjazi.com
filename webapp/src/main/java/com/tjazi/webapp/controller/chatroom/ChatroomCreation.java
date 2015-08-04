@@ -2,9 +2,9 @@ package com.tjazi.webapp.controller.chatroom;
 
 import com.tjazi.chatroom.service.ChatroomService;
 import com.tjazi.chatroom.service.SingleChatroomDriver;
-import com.tjazi.webapp.messages.CreateChatroomMessage;
-import com.tjazi.webapp.messages.CreateChatroomResponseMessage;
-import com.tjazi.webapp.messages.CreateChatroomResult;
+import com.tjazi.webapp.messages.chatroomcreation.CreateChatroomMessage;
+import com.tjazi.webapp.messages.chatroomcreation.CreateChatroomResponseMessage;
+import com.tjazi.webapp.messages.chatroomcreation.CreateChatroomResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,9 @@
 <div class="alert alert-danger" ng-show="vm.duplicatedChatName">
     Chat with name <strong>{{vm.duplicatedUserName}}</strong> is already registered.
 </div>
+<div class="alert alert-danger" ng-show="vm.generalError">
+    There's some problem with chat creation at the moment. Please try again in couple minutes.
+</div>
 <h3>New chat registration</h3>
 <div style="margin: 10px; border: thin lightblue solid; padding: 10px;">
     <form>
