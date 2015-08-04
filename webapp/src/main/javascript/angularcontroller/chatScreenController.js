@@ -23,6 +23,7 @@
         vm.allReceivedMessages = [];
         vm.chatroomName = "";
         vm.currentUserName = "";
+        vm.webSocketClient = null;
 
         /*
          /* Mouse and keyboard handlers
@@ -81,9 +82,9 @@
         }
 
         function connectViaWebSocket() {
-            var webSocketClient = new WebSocketClient();
+            vm.webSocketClient = new WebSocketClient($stateParams.chatroomUuid);
 
-            webSocketClient.connectViaWebSocket(
+            vm.webSocketClient.connectViaWebSocket(
                 function connectCallback() {
                     console.log("Connected to web socket!");
                 },
@@ -130,7 +131,7 @@
             var messageText = vm.textBoxMessageText;
 
             if (messageText !== "") {
-                webSocketClient.sendMessageOverWebSocket(messageText);
+                vm.webSocketClient.sendMessageOverWebSocket(messageText);
 
                 console.log("Sending message: " + messageText);
 

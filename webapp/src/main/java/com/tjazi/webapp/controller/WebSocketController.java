@@ -15,6 +15,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
+import java.util.UUID;
 
 /**
  * Created by kwasiak on 16/07/15.
@@ -74,16 +75,16 @@ public class WebSocketController {
         // fill the sender field and re-send to the chat
         chatMessage.setSenderUserName(messageSenderName);
 
-        template.convertAndSend("/topic/chatroom1", chatMessage);
+        template.convertAndSend("/topic/" + receiver, chatMessage);
     }
 
-    private boolean isUserValidForChatroom(String userName, String chatroomName) {
+    private boolean isUserValidForChatroom(String userName, String chatroomUuid) {
 
         // check if that chatroom really exists
-        SingleChatroomDriver chatroomDriver = chatroomService.findChatroomByName(chatroomName);
+        SingleChatroomDriver chatroomDriver = chatroomService.findChatroomByUuid(UUID.fromString(chatroomUuid));
 
         if (chatroomDriver == null) {
-            log.error("Can't find chatroom with given name ('{}'). Dropping message.", chatroomName);
+            log.error("Can't find chatroom with given UUID ('{}'). Dropping message.", chatroomUuid);
             return false;
         }
 

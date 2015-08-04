@@ -2,15 +2,24 @@
  * Created by kwasiak on 15/07/15.
  */
 /*jshint unused:false*/
-var WebSocketClient = function () {
+var WebSocketClient = function (topic) {
 
     "use strict";
 
-    var endpointName = "/messages";
-    var targetTopic = "chatroom1";
-    var stompClient = null;
+    var _connectViaWebSocket = null;
+    var _sendMessageOverWebSocket = null;
+    var _disconnectWebSocket = null;
 
-    var _connectViaWebSocket = function (connectCallback, messageReceiveCallback) {
+    if (!topic) {
+        console.error("Topic is null or empty.");
+    }
+
+    else {
+        var endpointName = "/messages";
+        var targetTopic = topic;
+        var stompClient = null;
+
+        _connectViaWebSocket = function (connectCallback, messageReceiveCallback) {
             var socket = new SockJS(endpointName);
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function connectionAck(frame) {
@@ -37,35 +46,39 @@ var WebSocketClient = function () {
             });
         };
 
-    var _sendMessageOverWebSocket = function (messageText) {
+        _sendMessageOverWebSocket = function (messageText) {
 
-        if (!messageText) {
-            // do nothing if message is empty, null, etc.
-            return;
-        }
+            if (!messageText) {
+                console.error("Message is null or empty.");
 
-        if (stompClient === null) {
-            console.error("stompClient is not initialized");
-        } else {
-            stompClient.send("/app" + endpointName, {},
-                JSON.stringify({
-                    "messageText": messageText,
-                    "receiver": "chatroom1",
-                    "receiverType": "CHATROOM"
-                }));
-        }
-    };
+                // do nothing if message is empty, null, etc.
+                return;
+            }
 
-    var _disconnectWebSocket = function () {
-        if (stompClient === null) {
-            console.error("Tries to disconnect connection, which is already closed.");
-        } else {
-            stompClient.disconnect();
-            stompClient = null;
+            if (stompClient === null) {
+                console.error("stompClient is not initialized");
+            } else {
+                stompClient.send("/app" + endpointName, {},
+                    JSON.stringify({
+                        "messageText": messageText,
+                        "receiver": targetTopic,
+                        "receiverType": "CHATROOM"
+                    }));
+            }
+        };
 
-            console.log("Disconnected...");
-        }
-    };
+        _disconnectWebSocket = function () {
+            if (stompClient === null) {
+                console.error("Tries to disconnect connection, which is already closed.");
+            } else {
+                stompClient.disconnect();
+                stompClient = null;
+
+                console.log("Disconnected...");
+            }
+        };
+    }
+
 
     return {
         connectViaWebSocket: _connectViaWebSocket,

@@ -65,7 +65,9 @@ public class ChatroomProperties {
 
         if (!singleChatroomDriver.isUserInChatroom(authenticatedUserName)) {
             log.error("User '{}' is authenticated, but doesn't belong to chatroom '{}' (GUID: {}). Permission denied.",
-                    singleChatroomDriver.getChatroomName(), singleChatroomDriver.getChatroomUuid());
+                    authenticatedUserName,
+                    singleChatroomDriver.getChatroomName(),
+                    singleChatroomDriver.getChatroomUuid());
             return new GetChatroomPropertiesResponseMessage(GetChatroomPropertiesResult.PERMISSION_DENIED);
         }
 
