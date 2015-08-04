@@ -20,6 +20,11 @@ public enum CreateChatroomResult {
     CHATROOM_EXISTS,
 
     /**
+     * Current user not logged-in or can't create a new chat
+     */
+    PERMISSION_DENIED,
+
+    /**
      * General error, try again later
      */
     GENERAL_ERROR

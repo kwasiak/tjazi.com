@@ -6,7 +6,6 @@ package com.tjazi.webapp.messages.chatroomcreation;
 public class CreateChatroomMessage {
 
     private String chatroomName;
-    private String chatroomAdministratorUserName;
 
     public String getChatroomName() {
         return chatroomName;
@@ -14,13 +13,5 @@ public class CreateChatroomMessage {
 
     public void setChatroomName(String chatroomName) {
         this.chatroomName = chatroomName;
-    }
-
-    public String getChatroomAdministratorUserName() {
-        return chatroomAdministratorUserName;
-    }
-
-    public void setChatroomAdministratorUserName(String chatroomAdministratorUserName) {
-        this.chatroomAdministratorUserName = chatroomAdministratorUserName;
     }
 }

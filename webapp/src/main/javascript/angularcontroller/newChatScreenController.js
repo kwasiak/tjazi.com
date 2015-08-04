@@ -35,13 +35,13 @@
 
         function chatCreationResult(result) {
 
-            switch (result.result) {
+            switch (result.createChatroomResult) {
                 case "OK":
                     resetErrors();
                     /* TODO: move to newly created chatroom */
                     break;
 
-                case "DUPLICATED_CHAT_NAME":
+                case "CHATROOM_EXISTS":
                     vm.duplicatedChatName = vm.newChatForm.chatName;
                     break;
 

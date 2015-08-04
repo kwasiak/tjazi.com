@@ -2,6 +2,7 @@ package com.tjazi.webapp.controller.chatroom;
 
 import com.tjazi.chatroom.service.ChatroomService;
 import com.tjazi.chatroom.service.SingleChatroomDriver;
+import com.tjazi.security.service.SecurityService;
 import com.tjazi.webapp.messages.chatroomcreation.CreateChatroomMessage;
 import com.tjazi.webapp.messages.chatroomcreation.CreateChatroomResponseMessage;
 import com.tjazi.webapp.messages.chatroomcreation.CreateChatroomResult;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/chatroom")
-public class ChatroomCreation {
+public class ChatroomCreationController {
 
     @Autowired
     private ChatroomService chatroomService;
 
-    private static final Logger log = LoggerFactory.getLogger(ChatroomCreation.class);
+    @Autowired
+    private SecurityService securityService;
+
+    private static final Logger log = LoggerFactory.getLogger(ChatroomCreationController.class);
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public CreateChatroomResponseMessage createChatroom(
@@ -31,7 +35,6 @@ public class ChatroomCreation {
 
         try {
             String chatroomName = createChatroomMessage.getChatroomName();
-            String userName = createChatroomMessage.getChatroomAdministratorUserName();
 
             log.debug("Got request to create chatroom. Name: '{}'", chatroomName);
 
@@ -39,12 +42,19 @@ public class ChatroomCreation {
                 return new CreateChatroomResponseMessage(CreateChatroomResult.CHATROOM_EXISTS, null);
             }
 
-            log.debug("Adding administrator to the chatroom. Administrator: '{}'", userName);
+            String currentUserName = this.getCurrentLoggedUser();
+
+            if (currentUserName == null || currentUserName.isEmpty()) {
+                log.error("Chatroot creation request from user, who is not logged-in.");
+                return new CreateChatroomResponseMessage(CreateChatroomResult.PERMISSION_DENIED, null);
+            }
+
+            log.debug("Adding administrator to the chatroom. Administrator: '{}'", currentUserName);
 
             SingleChatroomDriver chatroomDriver = chatroomService.createNewChatroom(chatroomName);
 
             // because this is new chatroom, there's no need to check if user already exists
-            chatroomDriver.addUserToChatroom(userName);
+            chatroomDriver.addUserToChatroom(currentUserName);
 
             return new CreateChatroomResponseMessage(CreateChatroomResult.OK,
                     chatroomDriver.getChatroomUuid());
@@ -54,5 +64,9 @@ public class ChatroomCreation {
             log.error("Exception when processing CreateChatroomMessage message. Details:\n" + ex);
             return new CreateChatroomResponseMessage(CreateChatroomResult.GENERAL_ERROR, null);
         }
+    }
+
+    private String getCurrentLoggedUser() {
+        return securityService.getCurrentUserName();
     }
 }
