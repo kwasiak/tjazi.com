@@ -6,9 +6,10 @@
 
     angular.module(TjaziApplicationName)
         .controller("ChatScreenController",
-        ["$scope", "$stateParams", "$state", "$chatroomService", chatScreenController]);
+        ["$scope", "$stateParams", "$state", "$chatroomService", "$location",
+            chatScreenController]);
 
-    function chatScreenController($scope, $stateParams, $state, $chatroomService) {
+    function chatScreenController($scope, $stateParams, $state, $chatroomService, $location) {
 
         /* jshint validthis: true */
         var vm = this;
@@ -24,6 +25,7 @@
         vm.chatroomName = "";
         vm.currentUserName = "";
         vm.webSocketClient = null;
+        vm.getJoinChatLink = getJoinChatLink;
 
         /*
          /* Mouse and keyboard handlers
@@ -42,17 +44,6 @@
         $(window).resize(function(){ // On resize
             resizeChatWindow();
         });
-
-        vm.allReceivedMessages.push(
-            {
-                "sender": "Krzysztof Wasiak",
-                "messageText": "The karma studies1Chicken breasts combines greatly with bloody marshmellow."
-            },
-            {
-                "sender": "Daniel Ogorzalek",
-                "messageText": "Freedom views when you hurt with bliss.Ales grow on malaria at prison!Anomaly at the alpha quadrant was the mystery of mineral, fighted to a ship-wide green people."
-            }
-        );
 
         // proceed only of entry parameters are ok
         if (assertInputParametersAreOk()) {
@@ -137,6 +128,10 @@
 
                 vm.textBoxMessageText = "";
             }
+        }
+
+        function getJoinChatLink() {
+            return $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/chatroom/join/" + $stateParams.chatroomUuid;
         }
     }
 
