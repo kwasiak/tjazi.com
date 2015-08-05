@@ -22,12 +22,12 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "/chatroom")
-public class ChatroomProperties {
+public class ChatroomPropertiesController {
 
     @Autowired
     private ChatroomService chatroomService;
 
-    private static final Logger log = LoggerFactory.getLogger(ChatroomProperties.class);
+    private static final Logger log = LoggerFactory.getLogger(ChatroomPropertiesController.class);
 
     @RequestMapping(value = "/properties", method = RequestMethod.POST)
     public GetChatroomPropertiesResponseMessage getChatroomProperties(

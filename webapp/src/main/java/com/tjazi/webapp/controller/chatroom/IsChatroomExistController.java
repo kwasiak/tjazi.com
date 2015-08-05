@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/chatroom")
-public class IsChatroomExist {
+public class IsChatroomExistController {
 
     @Autowired
     private ChatroomService chatroomService;
 
-    private static final Logger log = LoggerFactory.getLogger(IsChatroomExist.class);
+    private static final Logger log = LoggerFactory.getLogger(IsChatroomExistController.class);
 
     @RequestMapping(value = "/isexist", method = RequestMethod.POST)
     public IsChatroomExistResponseMessage isChatroomExist(
