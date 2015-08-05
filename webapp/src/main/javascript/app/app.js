@@ -8,6 +8,12 @@ window.StateNames =
         newUser: "newUserScreen"
     };
 
+// names of the events, which are exchanged between controllers via $broadcast / $on
+window.PubSubEventNames =
+{
+    chatroomsUpdate: "chatrooms-update"
+};
+
 window.TjaziApplicationName = "tjaziWebApp";
 
 (function () {

@@ -13,6 +13,7 @@
     var IS_CHAT_EXIST_URL = "/chatroom/isexist";
     var CREATE_CHATROOM_URL = "/chatroom/create";
     var GET_CHATROOM_PROPERTIES_URL = "/chatroom/properties";
+    var GET_CHATROOMS_FOR_USER_URL = "/chatroom/listforuser";
 
     function ChatroomService($http) {
 
@@ -68,6 +69,19 @@
                 .error(reportHttpErrorToConsole);
         }
 
+        function _getChatroomsForCurrentUser(resultCallback) {
+            $http.post(GET_CHATROOMS_FOR_USER_URL, {})
+                .success(function(data) {
+                    console.log("_getChatroomProperties: received data. Result code:" + data.result);
+
+                    if (resultCallback) {
+                        resultCallback(data);
+                    }
+                })
+                .error(reportHttpErrorToConsole);
+
+        }
+
         function reportHttpErrorToConsole(data, status, headers) {
             console.error("_isChatroomExist, got error response.\n" + data + "\n" + status + "\n" + headers);
         }
@@ -75,7 +89,8 @@
         return {
             isChatroomExist : _isChatroomExist,
             createChatroom : _createChatroom,
-            getChatroomProperties: _getChatroomProperties
+            getChatroomProperties: _getChatroomProperties,
+            getChatroomsForCurrentUser: _getChatroomsForCurrentUser
         };
     }
 }());

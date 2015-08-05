@@ -2,7 +2,6 @@
         <h3 style="margin: 0px;display: inline-block">Chat name: <span>{{vm.chatroomName}}</span>, user name: <span>{{vm.currentUserName}}</span></h3>
         <div class="btn btn-success" data-toggle="modal"
                 data-target="#joinCharUrlModal">Invite others</div>
-    </div>
     <div id="chatHistory" style="overflow-y: auto; overflow-x: hidden">
         <div style="margin: 10px 20px; "
              ng-repeat="message in vm.allReceivedMessages">

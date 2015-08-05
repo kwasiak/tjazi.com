@@ -49,10 +49,20 @@
          style="background: black; position: absolute;
              left: 0em; width: 200px; height: 100%; color: whitesmoke; margin-top: -50px; z-index: -1;
              padding-top: 70px;">
-        <ul>
-            <li>Krzys</li>
-            <li>Wasiak</li>
-        </ul>
+
+        <div id="chatroomsSpec" ng-show="isUserAuthenticated()">
+            <div ng-show="!userChatRooms">
+                <span style="font-weight: bold">No chatrooms for you yet!</span>
+            </div>
+
+            <div ng-show="userChatRooms">
+                Number of chatrooms: <strong>{{userChatRooms.length}}</strong>
+            </div>
+            <div ng-repeat="chatroom in userChatRooms">
+                <a ui-sref="chatScreen({chatroomUuid: chatroom.chatroomUuid})">{{chatroom.chatroomName}}</a>
+            </div>
+
+        </div>
     </div>
 
     <div style="margin-left: 214px; margin-right: 14px;">

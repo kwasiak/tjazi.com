@@ -7,9 +7,10 @@
 
     angular.module(TjaziApplicationName)
         .controller("NewChatScreenController",
-            ["$state", "$chatroomService", newChatScreenController]);
+            ["$state", "$chatroomService", "$rootScope",
+                newChatScreenController]);
 
-    function newChatScreenController($state, $chatroomService) {
+    function newChatScreenController($state, $chatroomService, $rootScope) {
         console.log($state);
 
         /* jshint validthis: true */
@@ -42,6 +43,9 @@
                     $state.go(StateNames.chat, {
                         chatroomUuid: result.chatroomUuid
                     });
+
+                    // notify all listeners that there's a new chat registered
+                    $rootScope.$broadcast(PubSubEventNames.chatroomsUpdate);
 
                     break;
 
