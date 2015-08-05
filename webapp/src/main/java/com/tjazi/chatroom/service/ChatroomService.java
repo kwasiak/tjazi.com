@@ -1,5 +1,6 @@
 package com.tjazi.chatroom.service;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -19,6 +20,13 @@ public interface ChatroomService {
     SingleChatroomDriver findChatroomByUuid(UUID chatroomUuid);
 
     SingleChatroomDriver findChatroomByName(String chatroomName);
+
+    /**
+     * Get list of chatrooms, which given user belongs to
+     * @param userName name of the user
+     * @return List of chatrooms, which given user belongs to
+     */
+    List<SingleChatroomDriver> getChatroomsForUser(String userName);
 
 
 }

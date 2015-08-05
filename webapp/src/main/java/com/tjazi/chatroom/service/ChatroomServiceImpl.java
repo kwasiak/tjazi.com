@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by kwasiak on 19/07/15.
@@ -80,5 +81,17 @@ public class ChatroomServiceImpl implements ChatroomService {
                         .findFirst();
 
         return matchingElement.orElse(null);
+    }
+
+    @Override
+    public List<SingleChatroomDriver> getChatroomsForUser(String userName) {
+
+        if (userName == null || userName.isEmpty()) {
+            throw new IllegalArgumentException("userName is null or empty.");
+        }
+
+        return chatroomData.stream()
+                .filter(x -> x.isUserInChatroom(userName))
+                .collect(Collectors.toList());
     }
 }

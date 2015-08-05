@@ -22,9 +22,16 @@
         $scope.currentUserName = $rootScope.userName;
 
         $rootScope.$watch("userName", onUserNameChange);
+        $rootScope.$watch("authenticated", onAuthenticatedStatusChange);
 
         function onUserNameChange() {
             $scope.currentUserName = $rootScope.userName;
+        }
+
+        function onAuthenticatedStatusChange() {
+            if ($rootScope.authenticated) {
+                alert("Authenticated!!");
+            }
         }
 
         function isUserAuthenticated() {
