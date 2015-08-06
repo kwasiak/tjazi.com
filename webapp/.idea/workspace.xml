@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d33b6e7a-a6b0-4bc0-8ef1-10cacf08eabc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/shell_upstart/tjazi.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/webapp_war.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/webapp_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp.iml" afterPath="$PROJECT_DIR$/webapp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/shell_upstart/tjazi.conf" afterPath="$PROJECT_DIR$/src/main/shell_upstart/tjazi.conf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webapp.iws" />
@@ -74,8 +69,8 @@
       <file leaf-file-name="tjazi.conf" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/shell_upstart/tjazi.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.05642633">
-              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.87460816">
+              <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -151,7 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/userprofile/NewUserProfileRequestMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/userprofile/CreateUserProfileResponseMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tjazi/webapp/messages/userprofile/CreateUserProfileResult.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/newUserScreen.html" />
@@ -202,6 +196,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/shell/tjazi-webapp.sh" />
         <option value="$PROJECT_DIR$/src/main/shell/tjazi.conf" />
+        <option value="$PROJECT_DIR$/src/main/shell_upstart/tjazi.conf" />
       </list>
     </option>
   </component>
@@ -1533,16 +1528,16 @@
       <workItem from="1438857290388" duration="2829000" />
       <workItem from="1438868511584" duration="179000" />
       <workItem from="1438870234756" duration="424000" />
-      <workItem from="1438871970192" duration="217000" />
+      <workItem from="1438871970192" duration="1258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="293431000" />
+    <option name="totallyTimeSpent" value="294472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1922" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1553,7 +1548,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33113313" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30349344" sideWeight="0.4855615" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30349344" sideWeight="0.4855615" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16719915" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2017,8 +2012,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/shell_upstart/tjazi.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05642633">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.87460816">
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="35" />
           <folding />
         </state>
       </provider>
