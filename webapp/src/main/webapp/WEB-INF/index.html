@@ -22,7 +22,8 @@
 </head>
 <body ng-app="tjaziWebApp" ng-controller="IndexController">
 
-    <nav id="topNavBar" class="navbar navbar-default" role="navigation" style="height: 50px; margin: 0px;">
+    <nav id="topNavBar" class="navbar navbar-default" role="navigation"
+         style="height: 50px; margin: 0px;z-index: 2;">
         <div class="navbar-brand" th:href="@{/}">
             <a ui-sref="home">tjazi.com</a>
         </div>
@@ -47,7 +48,7 @@
 
     <div id="sideNavParent"
          style="background: black; position: absolute;
-             left: 0em; width: 200px; height: 100%; color: whitesmoke; margin-top: -50px; z-index: -1;
+             left: 0em; width: 200px; height: 100%; color: whitesmoke; margin-top: -50px; z-index: 1;
              padding-top: 70px;">
 
         <div id="chatroomsSpec" ng-show="isUserAuthenticated()">
