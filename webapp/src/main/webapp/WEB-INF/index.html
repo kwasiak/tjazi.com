@@ -19,13 +19,27 @@
 
     <script th:src="@{/js/libs.min.js}" src="js/libs.min.js"></script>
     <script th:src="@{/js/app.min.js}" src="js/app.min.js"></script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-63131194-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 <body ng-app="tjaziWebApp" ng-controller="IndexController">
 
     <nav id="topNavBar" class="navbar navbar-default" role="navigation"
          style="height: 50px; margin: 0px;z-index: 2;">
         <div class="navbar-brand" th:href="@{/}">
-            <a ui-sref="home">tjazi.com</a>
+            <a ui-sref="home">tjazi.com</a> <span style="font: 12px bold sans-serif;">(v0.0.0.1)</span>
+        </div>
+        <div>
+
         </div>
 
         <div class="navbar-collapse collapse">
